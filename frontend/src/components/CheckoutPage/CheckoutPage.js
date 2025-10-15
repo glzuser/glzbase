@@ -29,7 +29,7 @@ import Invoices from "../../pages/Financeiro";
 
 
 export default function CheckoutPage(props) {
-  const steps = ["Datos", "Personalizar", "Revisar"];
+  const steps = ["Dados", "Personalizar", "Revisar"];
   const { formId, formField } = checkoutFormModel;
   
   
@@ -90,7 +90,7 @@ function _renderStepContent(step, setFieldValue, setActiveStep, values ) {
       setDatePayment(data)
       actions.setSubmitting(false);
       setActiveStep(activeStep + 1);
-toast.success("¡Suscripción realizada con éxito! Esperando la confirmación del pago");
+toast.success("Assinatura realizada com sucesso! Aguardando confirmação do pagamento");
     } catch (err) {
       toastError(err);
     }
@@ -113,7 +113,7 @@ toast.success("¡Suscripción realizada con éxito! Esperando la confirmación d
   return (
     <React.Fragment>
       <Typography component="h1" variant="h4" align="center">
-      Falta poco!
+      Falta pouco!
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map((label) => (
@@ -141,7 +141,7 @@ toast.success("¡Suscripción realizada con éxito! Esperando la confirmación d
                 <div className={classes.buttons}>
                   {activeStep !== 1 && (
                     <Button onClick={_handleBack} className={classes.button}>
-                      Regresar
+                      Voltar
                     </Button>
                   )}
                   <div className={classes.wrapper}>
@@ -153,7 +153,7 @@ toast.success("¡Suscripción realizada con éxito! Esperando la confirmación d
                         color="primary"
                         className={classes.button}
                       >
-                        {isLastStep ? "PAGAR" : "PROXIMO"}
+                        {isLastStep ? "PAGAR" : "PRÓXIMO"}
                       </Button>
                     )}
                     {isSubmitting && (

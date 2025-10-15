@@ -281,11 +281,11 @@ export function PlanManagerForm(props) {
                         {/* INTEGRACOES */}
                         <Grid xs={12} sm={8} md={2} item>
                             <FormControl margin="dense" variant="outlined" fullWidth>
-                                <InputLabel htmlFor="useIntegrations-selection">Integraciones</InputLabel>
+                                <InputLabel htmlFor="useIntegrations-selection">Integrações</InputLabel>
                                 <Field
                                     as={Select}
                                     id="useIntegrations-selection"
-                                    label="Integraciones"
+                                    label="Integrações"
                                     labelId="useIntegrations-selection-label"
                                     name="useIntegrations"
                                     margin="dense"
@@ -398,7 +398,7 @@ export function PlansManagerGrid(props) {
                         <TableCell align="center">API Externa</TableCell>
                         <TableCell align="center">Kanban</TableCell>
                         <TableCell align="center">Open.Ai</TableCell>
-                        <TableCell align="center">Integraciones</TableCell>
+                        <TableCell align="center">Integrações</TableCell>
 						<TableCell align="center">Plan Interno</TableCell>
                     </TableRow>
                 </TableHead>
@@ -468,7 +468,7 @@ export default function PlansManager() {
             const planList = await list()
             setRecords(planList)
         } catch (e) {
-            toast.error('No fue posible cargar la lista de registros');
+            toast.error('Não foi possível carregar a lista de registros');
         }
         setLoading(false)
     }
@@ -484,9 +484,9 @@ export default function PlansManager() {
             }
             await loadPlans()
             handleCancel()
-            toast.success('¡Operación realizada con éxito!')
+            toast.success('Operação realizada com sucesso!')
         } catch (e) {
-            toast.error('No fue posible realizar la operación. Verifique si ya existe un plan con el mismo nombre o si los campos fueron completados correctamente')
+            toast.error('Não foi possível realizar a operação. Verifique se já existe um plano com o mesmo nome ou se os campos foram preenchidos corretamente')
         }        
         setLoading(false)
     }
@@ -497,7 +497,7 @@ export default function PlansManager() {
             await remove(record.id)
             await loadPlans()
             handleCancel()
-            toast.success('¡Operación realizada con éxito!')
+            toast.success('Operação realizada com sucesso!')
         } catch (e) {
             toast.error('No fue posible realizar la operación')
         }        

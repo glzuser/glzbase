@@ -25,7 +25,7 @@ import { has, head, isArray } from "lodash";
 import { toast } from "react-toastify";
 import useCompanies from "../../hooks/useCompanies";
 import { useDate } from "../../hooks/useDate";
-import usePlans from "../../hooks/usePlans";
+import usePlanos from "../../hooks/usePlanos";
 import api from "../../services/api";
 import ModalUsers from "../ModalUsers";
 
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 export function CompanyForm(props) {
   const { onSubmit, onDelete, onCancel, initialValue, loading } = props;
   const classes = useStyles();
-  const [plans, setPlans] = useState([]);
+  const [plans, setPlanos] = useState([]);
   const [modalUser, setModalUser] = useState(false);
   const [firstUser, setFirstUser] = useState({});
 
@@ -88,12 +88,12 @@ export function CompanyForm(props) {
     ...initialValue,
   });
 
-  const { list: listPlans } = usePlans();
+  const { list: listPlanos } = usePlanos();
 
   useEffect(() => {
     async function fetchData() {
-      const list = await listPlans();
-      setPlans(list);
+      const list = await listPlanos();
+      setPlanos(list);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -203,7 +203,7 @@ export function CompanyForm(props) {
               <Grid xs={12} sm={6} md={4} item>
                 <Field
                   as={TextField}
-                  label="Nombre"
+                  label="Nome"
                   name="name"
                   variant="outlined"
                   className={classes.fullWidth}
@@ -224,7 +224,7 @@ export function CompanyForm(props) {
               <Grid xs={12} sm={6} md={2} item>
                 <Field
                   as={TextField}
-                  label="Teléfono"
+                  label="Telefone"
                   name="phone"
                   variant="outlined"
                   className={classes.fullWidth}
@@ -233,11 +233,11 @@ export function CompanyForm(props) {
               </Grid>
               <Grid xs={12} sm={6} md={2} item>
                 <FormControl margin="dense" variant="outlined" fullWidth>
-                  <InputLabel htmlFor="plan-selection">Plan</InputLabel>
+                  <InputLabel htmlFor="plan-selection">Plano</InputLabel>
                   <Field
                     as={Select}
                     id="plan-selection"
-                    label="Plan"
+                    label="Plano"
                     labelId="plan-selection-label"
                     name="planId"
                     margin="dense"
@@ -262,7 +262,7 @@ export function CompanyForm(props) {
                     name="status"
                     margin="dense"
                   >
-                    <MenuItem value={true}>Si</MenuItem>
+                    <MenuItem value={true}>Sim</MenuItem>
                     <MenuItem value={false}>No</MenuItem>
                   </Field>
                 </FormControl>
@@ -287,7 +287,7 @@ export function CompanyForm(props) {
                 <FormControl variant="outlined" fullWidth>
                   <Field
                     as={TextField}
-                    label="Fecha de Venc."
+                    label="Data de Venc."
                     type="date"
                     name="dueDate"
                     InputLabelProps={{
@@ -302,7 +302,7 @@ export function CompanyForm(props) {
               <Grid xs={12} sm={6} md={2} item>
                 <FormControl margin="dense" variant="outlined" fullWidth>
                   <InputLabel htmlFor="recorrencia-selection">
-                   Repetición
+                   Recorrência
                   </InputLabel>
                   <Field
                     as={Select}
@@ -312,11 +312,11 @@ export function CompanyForm(props) {
                     name="recurrence"
                     margin="dense"
                   >
-                    <MenuItem value="MENSAL">Mensual</MenuItem>
-                    {/*<MenuItem value="BIMESTRAL">Bimestral</MenuItem>*/}
-                    {/*<MenuItem value="TRIMESTRAL">Trimestral</MenuItem>*/}
-                    {/*<MenuItem value="SEMESTRAL">Semestral</MenuItem>*/}
-                    {/*<MenuItem value="ANUAL">Anual</MenuItem>*/}
+                    <MenuItem value="MENSAL">Mensal</MenuItem>
+                    {<MenuItem value="BIMESTRAL">Bimestral</MenuItem>}
+                    {<MenuItem value="TRIMESTRAL">Trimestral</MenuItem>}
+                    {<MenuItem value="SEMESTRAL">Semestral</MenuItem>}
+                    {<MenuItem value="ANUAL">Anual</MenuItem>}
                   </Field>
                 </FormControl>
               </Grid>
@@ -330,7 +330,7 @@ export function CompanyForm(props) {
                       onClick={() => onCancel()}
                       variant="contained"
                     >
-                      Limpiar
+                      Limpar
                     </ButtonWithSpinner>
                   </Grid>
                   {record.id !== undefined ? (
@@ -382,7 +382,7 @@ export function CompanyForm(props) {
                       variant="contained"
                       color="primary"
                     >
-                      Guardar
+                      Salvar
                     </ButtonWithSpinner>
                   </Grid>
                 </Grid>
@@ -401,10 +401,10 @@ export function CompaniesManagerGrid(props) {
   const { dateToClient } = useDate();
 
   const renderStatus = (row) => {
-    return row.status === false ? "Pausada" : "Activa";
+    return row.status === false ? "Pausada" : "Ativa";
   };
 
-  const renderPlan = (row) => {
+  const renderPlano = (row) => {
     return row.planId !== null ? row.plan.name : "-";
   };
 
@@ -453,13 +453,13 @@ export function CompaniesManagerGrid(props) {
               #
             </TableCell>
 			      <TableCell align="left">ID</TableCell>
-            <TableCell align="left">Nombre</TableCell>
+            <TableCell align="left">Nome</TableCell>
             <TableCell align="left">E-mail</TableCell>
-            <TableCell align="left">Teléfono</TableCell>
-            <TableCell align="left">Plan</TableCell>
+            <TableCell align="left">Telefone</TableCell>
+            <TableCell align="left">Plano</TableCell>
            {/*  <TableCell align="left">Campañas</TableCell> */}
             <TableCell align="left">Status</TableCell>
-            <TableCell align="left">Creada</TableCell>
+            <TableCell align="left">Criada</TableCell>
             <TableCell align="left">Vencimento</TableCell>
           </TableRow>
         </TableHead>
@@ -475,7 +475,7 @@ export function CompaniesManagerGrid(props) {
               <TableCell align="left">{row.name || "-"}</TableCell>
               <TableCell align="left">{row.email || "-"}</TableCell>
               <TableCell align="left">{row.phone || "-"}</TableCell>
-              <TableCell align="left">{renderPlan(row)}</TableCell>
+              <TableCell align="left">{renderPlano(row)}</TableCell>
 			{/*<TableCell align="left">{renderCampaignsStatus(row)}</TableCell>*/}
               <TableCell align="left">{renderStatus(row)}</TableCell>
               <TableCell align="left">{dateToClient(row.createdAt)}</TableCell>
@@ -512,17 +512,17 @@ export default function CompaniesManager() {
   });
 
   useEffect(() => {
-    loadPlans();
+    loadPlanos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadPlans = async () => {
+  const loadPlanos = async () => {
     setLoading(true);
     try {
       const companyList = await list();
       setRecords(companyList);
     } catch (e) {
-      toast.error("NO SE PUDO CARGAR LA LISTA DE REGISTROS");
+      toast.error("NÃO FOI POSSÍVEL CARREGAR A LISTA DE REGISTROS");
     }
     setLoading(false);
   };
@@ -535,12 +535,12 @@ export default function CompaniesManager() {
       } else {
         await save(data);
       }
-      await loadPlans();
+      await loadPlanos();
       handleCancel();
-      toast.success("¡Operación realizada con éxito!");
+      toast.success("Operação realizada com sucesso!");
     } catch (e) {
       toast.error(
-        "No fue posible realizar la operación. Verifica si ya existe una empresa con el mismo nombre o si los campos fueron completados correctamente"
+        "Não foi possível realizar a operação. Verifique se já existe uma empresa com o mesmo nome ou se os campos foram preenchidos corretamente"
       );
     }   
     setLoading(false);
@@ -550,11 +550,11 @@ export default function CompaniesManager() {
     setLoading(true);
     try {
       await remove(record.id);
-      await loadPlans();
+      await loadPlanos();
       handleCancel();
-      toast.success("¡Operación realizada con éxito!");
+      toast.success("Operação realizada com sucesso!");
     } catch (e) {
-      toast.error("No fue posible realizar la operación");
+      toast.error("Não foi possível realizar a operação");
     }  
     setLoading(false);
   };
@@ -625,7 +625,7 @@ export default function CompaniesManager() {
         onClose={() => setShowConfirmDialog(false)}
         onConfirm={() => handleDelete()}
       >
-       ¿Está seguro que desea eliminar este registro?
+       Tem certeza de que deseja excluir este registro?
       </ConfirmationModal>
     </Paper>
   );

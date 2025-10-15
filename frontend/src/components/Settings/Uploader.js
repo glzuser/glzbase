@@ -136,7 +136,7 @@ const Uploader = () => {
   useEffect(() => {
     async function fetchData() {
       if (!user.super) {
-        toast.error("¡Sin permiso para acceder!");
+        toast.error("Sem permissão para acessar!");
         setTimeout(() => {
           history.push(`/`)
         }, 500);
@@ -157,7 +157,7 @@ const handleFileChange = (event) => {
   } else {
     setFile(null);
     setSelectedFileName(null);
-    toast.error("¡Utilice solo archivos en formato PNG, ICO o SVG!");
+    toast.error("Use apenas arquivos no formato PNG, ICO ou SVG!");
   }
 };
 
@@ -169,12 +169,12 @@ const handleFileChange = (event) => {
     event.preventDefault();
 
     if (!file) {
-      toast.warn("¡Elija un archivo!");
+      toast.warn("Escolha um arquivo!");
       return;
     }
     
     if (!selectedOption) {
-      toast.warn("¡Elija un destino!");
+      toast.warn("Escolha um destino!");
       return;
     }    
 
@@ -185,7 +185,7 @@ const handleFileChange = (event) => {
 
       if (response.data.mensagem === 'Arquivo Anexado') {
         setUploaded(true);
-        toast.success("¡Archivo enviado con éxito!");
+        toast.success("Arquivo enviado com sucesso!");
         window.location.reload();
 
       }
@@ -208,25 +208,25 @@ return (
           marginTop: 20
         }}
       >
-        <Tab label="Logotipos / Iconos" />
+        <Tab label="Logotipos / Ícones" />
       </Tabs>
 
       <form onSubmit={handleSubmit} className={classes.fullWidth}>
       
       	<Grid item xs={12} sm={12} md={12} style={{ display: 'flex' }}>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="selectOption-label">Elige una opción:</InputLabel>
+            <InputLabel id="selectOption-label">Escolha uma opção:</InputLabel>
             <Select
               labelId="selectOption-label"
               value={selectedOption}
               onChange={handleOptionChange}
               style={{ marginTop: 15, marginBottom: 15}}
             >
-              <MenuItem value="signup">Pantalla de registro</MenuItem>
-              <MenuItem value="login">Pantalla de Login</MenuItem>
+              <MenuItem value="signup">Tela de registro</MenuItem>
+              <MenuItem value="login">Tela de Login</MenuItem>
               <MenuItem value="interno">Logotipo Interno</MenuItem>
 			  <MenuItem value="favicon">Favicon.Ico</MenuItem>
-              <MenuItem value="favicon-256x256">Icono 256x256</MenuItem>
+              <MenuItem value="favicon-256x256">Ícone 256x256</MenuItem>
 			  <MenuItem value="apple-touch-icon">Apple Touch Icon</MenuItem>
             </Select>
           </FormControl>
@@ -242,7 +242,7 @@ return (
         			className={classes.fileInput}
                     style={{ marginTop: 15, marginBottom: 15 }}
       			/>
-      			{selectedFileName ? selectedFileName : 'Elija imagen PNG'}
+      			{selectedFileName ? selectedFileName : 'Escolha imagem PNG'}
     			</label>
   			</FormControl>
 		</Grid>
@@ -255,7 +255,7 @@ return (
             variant="contained"
             color="primary"
           >
-            ENVIAR ARCHIVO
+            ENVIAR ARQUIVO
           </ButtonWithSpinner>
         </Grid>
       </form>

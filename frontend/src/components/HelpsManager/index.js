@@ -110,7 +110,7 @@ export function HelpManagerForm (props) {
                         <Grid xs={12} sm={12} md={6} item>
                             <Field
                                 as={TextField}
-                                label="Descripción"
+                                label="Descrição"
                                 name="description"
                                 variant="outlined"
                                 className={classes.fullWidth}
@@ -119,7 +119,7 @@ export function HelpManagerForm (props) {
                         </Grid>
                         <Grid sm={3} md={1} item>
                             <ButtonWithSpinner className={classes.fullWidth} loading={loading} onClick={() => onCancel()} variant="contained">
-                                Limpiar
+                                Limpar
                             </ButtonWithSpinner>
                         </Grid>
                         { record.id !== undefined ? (
@@ -131,7 +131,7 @@ export function HelpManagerForm (props) {
                         ) : null}
                         <Grid sm={3} md={1} item>
                             <ButtonWithSpinner className={classes.fullWidth} loading={loading} type="submit" variant="contained" color="primary">
-                                Guardar
+                                Salvar
                             </ButtonWithSpinner>
                         </Grid>
                     </Grid>
@@ -152,7 +152,7 @@ export function HelpsManagerGrid (props) {
                 <TableRow>
                     <TableCell align="center" style={{width: '1%'}}>#</TableCell>
                     <TableCell align="left">Título</TableCell>
-                    <TableCell align="left">Descripción</TableCell>
+                    <TableCell align="left">Descrição</TableCell>
                     <TableCell align="left">Vídeo</TableCell>
                 </TableRow>
                 </TableHead>
@@ -202,7 +202,7 @@ export default function HelpsManager () {
             const helpList = await list()
             setRecords(helpList)
         } catch (e) {
-            toast.error('No se pudo cargar la lista de registros');
+            toast.error('Não foi possível carregar a lista de registros');
         }
         setLoading(false)
     }
@@ -217,9 +217,9 @@ export default function HelpsManager () {
             }
             await loadHelps()
             handleCancel()
-            toast.success('¡Operación realizada con éxito!');
+            toast.success('Operação realizada com sucesso!');
         } catch (e) {
-          toast.error('No fue posible realizar la operación. Verifica si ya existe una ayuda con el mismo nombre o si los campos fueron completados correctamente');
+          toast.error('Não foi possível realizar a operação. Verifique se já existe uma ajuda com o mesmo nome ou se os campos foram preenchidos corretamente');
         }   
         setLoading(false)
     }
@@ -230,7 +230,7 @@ export default function HelpsManager () {
             await remove(record.id)
             await loadHelps()
             handleCancel()
-            toast.success('¡Operación realizada con éxito!');
+            toast.success('Operação realizada com sucesso!');
         } catch (e) {
           toast.error('No fue posible realizar la operación');
         }  
@@ -278,12 +278,12 @@ export default function HelpsManager () {
                 </Grid>
             </Grid>
             <ConfirmationModal
-                title="Eliminación de Registro"
+                title="Eliminação de Registro"
                 open={showConfirmDialog}
                 onClose={() => setShowConfirmDialog(false)}
                 onConfirm={() => handleDelete()}
             >
-                ¿Está seguro que desea eliminar este registro?
+                Tem certeza de que deseja eliminar este registro?
             </ConfirmationModal>
         </Paper>
     )

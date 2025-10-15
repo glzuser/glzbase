@@ -272,7 +272,7 @@ export default function Options(props) {
       key: "userRating",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingUserRating(false);
   }
 
@@ -283,7 +283,7 @@ export default function Options(props) {
       key: 'allowregister',
       value,
     });
-    toast.success('Operación actualizada con éxito.');
+    toast.success('Operação atualizada com sucesso.');
     setLoadingallowregister(false);
   }
  
@@ -295,7 +295,7 @@ export default function Options(props) {
       key: 'viewclosed',
       value,
     });
-    toast.success('Operación actualizada con éxito.');
+    toast.success('Operação atualizada com sucesso.');
     setLoadingviewclosed(false);
   }
 
@@ -306,7 +306,7 @@ export default function Options(props) {
       key: 'viewgroups',
       value,
     });
-    toast.success('Operación actualizada con éxito.');
+    toast.success('Operação atualizada com sucesso.');
     setLoadingviewgroups(false);
   }
     async function handleSendGreetingMessageOneQueues(value) {
@@ -316,7 +316,7 @@ export default function Options(props) {
       key: "sendGreetingMessageOneQueues",
       value,
     });
-	toast.success("Operación actualizada con éxito.");
+	toast.success("Operação atualizada com sucesso.");
     setLoadingSendGreetingMessageOneQueues(false);
   }
 
@@ -327,7 +327,7 @@ export default function Options(props) {
       key: 'viewregister',
       value,
     });
-    toast.success('Operación actualizada con éxito.');
+    toast.success('Operação atualizada com sucesso.');
     setLoadingviewregister(false);
   }
   
@@ -338,7 +338,7 @@ export default function Options(props) {
       key: 'trial',
       value,
     });
-    toast.success('Operación actualizada con éxito.');
+    toast.success('Operação atualizada com sucesso.');
     setLoadingtrial(false);
   }
 
@@ -351,7 +351,7 @@ export default function Options(props) {
       value,
     });
     //toast.success("Oraçãpeo atualizada com sucesso.");
-    toast.success('Operación actualizada con éxito.', {
+    toast.success('Operação atualizada com sucesso.', {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -373,7 +373,7 @@ export default function Options(props) {
       key: "call",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingCallType(false);
   }
 
@@ -384,7 +384,7 @@ export default function Options(props) {
       key: "chatBotType",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingChatbotType(false);
   }
 
@@ -395,7 +395,7 @@ export default function Options(props) {
       key: "CheckMsgIsGroup",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setCheckMsgIsGroupType(false);
     /*     if (typeof scheduleTypeChanged === "function") {
           scheduleTypeChanged(value);
@@ -410,7 +410,7 @@ export default function Options(props) {
       key: "sendGreetingAccepted",
       value,
     });
-	toast.success("Operación actualizada con éxito.");
+	toast.success("Operação atualizada com sucesso.");
     setLoadingSendGreetingAccepted(false);
   }  
   
@@ -425,7 +425,7 @@ export default function Options(props) {
       value,
     });
 
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingSettingsTransfTicket(false);
   } 
 
@@ -436,7 +436,7 @@ export default function Options(props) {
       key: "hubToken",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingHubNotificaMeType(false);
   } 
  
@@ -447,7 +447,7 @@ export default function Options(props) {
       key: "ipixc",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingIpIxcType(false);
   }
 
@@ -458,7 +458,7 @@ export default function Options(props) {
       key: "tokenixc",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingTokenIxcType(false);
   }
 
@@ -470,7 +470,7 @@ export default function Options(props) {
       key: "ipmkauth",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingIpMkauthType(false);
   }
 
@@ -481,7 +481,7 @@ export default function Options(props) {
       key: "clientidmkauth",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingClientIdMkauthType(false);
   }
 
@@ -492,7 +492,7 @@ export default function Options(props) {
       key: "clientsecretmkauth",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingClientSecrectMkauthType(false);
   }
 
@@ -503,7 +503,7 @@ export default function Options(props) {
       key: "asaas",
       value,
     });
-    toast.success("Operación actualizada con éxito.");
+    toast.success("Operação atualizada com sucesso.");
     setLoadingAsaasType(false);
   }
   return (
@@ -511,7 +511,7 @@ export default function Options(props) {
 <Grid spacing={3} container>
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="ratings-label">Reseñas</InputLabel>
+            <InputLabel id="ratings-label">Avaliações</InputLabel>
             <Select
               labelId="ratings-label"
               value={userRating}
@@ -519,8 +519,8 @@ export default function Options(props) {
                 handleChangeUserRating(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingUserRating && "Atualizando..."}
@@ -530,7 +530,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="schedule-type-label">
-            Gestión del horario comercial
+            Gestão do horário comercial
             </InputLabel>
             <Select
               labelId="schedule-type-label"
@@ -539,7 +539,7 @@ export default function Options(props) {
                 handleScheduleType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Desactivado</MenuItem>
+              <MenuItem value={"disabled"}>Desativado</MenuItem>
               <MenuItem value={"queue"}>Fila</MenuItem>
               <MenuItem value={"company"}>Empresa</MenuItem>
             </Select>
@@ -551,7 +551,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="group-type-label">
-            Ignorar mensajes de grupo
+            Ignorar mensagens de grupo
             </InputLabel>
             <Select
               labelId="group-type-label"
@@ -560,8 +560,8 @@ export default function Options(props) {
                 handleGroupType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingScheduleType && "Atualizando..."}
@@ -571,7 +571,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="call-type-label">
-              Aceptar LLamadas
+              Aceitar Chamadas
             </InputLabel>
             <Select
               labelId="call-type-label"
@@ -580,8 +580,8 @@ export default function Options(props) {
                 handleCallType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingCallType && "Atualizando..."}
@@ -612,7 +612,7 @@ export default function Options(props) {
 		{/* ENVIAR SAUDAÇÃO AO ACEITAR O TICKET */}
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="sendGreetingAccepted-label">Enviar saludo al aceptar el ticket</InputLabel>
+            <InputLabel id="sendGreetingAccepted-label">Enviar saudação ao aceitar o ticket</InputLabel>
             <Select
               labelId="sendGreetingAccepted-label"
               value={SendGreetingAccepted}
@@ -620,8 +620,8 @@ export default function Options(props) {
                 handleSendGreetingAccepted(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSendGreetingAccepted && "Atualizando..."}
@@ -633,7 +633,7 @@ export default function Options(props) {
 		{/* ENVIAR MENSAGEM DE TRANSFERENCIA DE SETOR/ATENDENTE */}
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="sendMsgTransfTicket-label">Enviar mensaje de transferencia de Fila/Agente</InputLabel>
+            <InputLabel id="sendMsgTransfTicket-label">Enviar mensagem de transferência de Fila/Agente</InputLabel>
             <Select
               labelId="sendMsgTransfTicket-label"
               value={SettingsTransfTicket}
@@ -641,8 +641,8 @@ export default function Options(props) {
                 handleSettingsTransfTicket(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSettingsTransfTicket && "Atualizando..."}
@@ -653,7 +653,7 @@ export default function Options(props) {
 		{/* ENVIAR SAUDAÇÃO QUANDO HOUVER SOMENTE 1 FILA */}
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="sendGreetingMessageOneQueues-label">Enviar saludo cuando solo 1 en Fila</InputLabel>
+            <InputLabel id="sendGreetingMessageOneQueues-label">Enviar saudação quando só 1 na Fila</InputLabel>
             <Select
               labelId="sendGreetingMessageOneQueues-label"
               value={sendGreetingMessageOneQueues}
@@ -661,8 +661,8 @@ export default function Options(props) {
                 handleSendGreetingMessageOneQueues(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>No</MenuItem>
-              <MenuItem value={"enabled"}>Si</MenuItem>
+              <MenuItem value={"disabled"}>Não</MenuItem>
+              <MenuItem value={"enabled"}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSendGreetingMessageOneQueues && "Atualizando..."}
@@ -672,7 +672,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id='viewclosed-label'>
-            ¿El operador ve tickets cerrados?
+            O operador vê tickets fechados?
             </InputLabel>
             <Select
               labelId='viewclosed-label'
@@ -681,8 +681,8 @@ export default function Options(props) {
                 handleviewclosed(e.target.value);
               }}
             >
-              <MenuItem value={'disabled'}>No</MenuItem>
-              <MenuItem value={'enabled'}>Si</MenuItem>
+              <MenuItem value={'disabled'}>Não</MenuItem>
+              <MenuItem value={'enabled'}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingviewclosed && 'Atualizando...'}
@@ -693,7 +693,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id='viewgroups-label'>
-            ¿El operador Visualiza Grupos?
+            O operador visualiza Grupos?
             </InputLabel>
             <Select
               labelId='viewgroups-label'
@@ -702,8 +702,8 @@ export default function Options(props) {
                 handleviewgroups(e.target.value);
               }}
             >
-              <MenuItem value={'disabled'}>No</MenuItem>
-              <MenuItem value={'enabled'}>Si</MenuItem>
+              <MenuItem value={'disabled'}>Não</MenuItem>
+              <MenuItem value={'enabled'}>Sim</MenuItem>
             </Select>
             <FormHelperText>
               {loadingviewgroups && 'Atualizando...'}
@@ -729,7 +729,7 @@ export default function Options(props) {
 						  marginTop: 20,
 						}}
 					  >
-						<Tab label='Configuración global' />
+						<Tab label='Configuração global' />
 					  </Tabs>
 					</Grid>
 
@@ -737,7 +737,7 @@ export default function Options(props) {
             <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
                   <InputLabel id='allowregister-label'>
-                  ¿Se permite el registro (inscripción)?
+                  É permitido o registro (inscrição)?
                   </InputLabel>
                   <Select
                     labelId='allowregister-label'
@@ -746,8 +746,8 @@ export default function Options(props) {
                       handleallowregister(e.target.value);
                     }}
                   >
-                    <MenuItem value={'disabled'}>No</MenuItem>
-                    <MenuItem value={'enabled'}>Si</MenuItem>
+                    <MenuItem value={'disabled'}>Não</MenuItem>
+                    <MenuItem value={'enabled'}>Sim</MenuItem>
                   </Select>
                   <FormHelperText>
                     {loadingallowregister && 'Atualizando...'}
@@ -758,7 +758,7 @@ export default function Options(props) {
 				  <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
                   <InputLabel id='viewregister-label'>
-                  ¿Registro (Inscripción) Visible?
+                  Registro (Inscrição) Visível?
                   </InputLabel>
                   <Select
                     labelId='viewregister-label'
@@ -767,8 +767,8 @@ export default function Options(props) {
                       handleviewregister(e.target.value);
                     }}
                   >
-                    <MenuItem value={'disabled'}>No</MenuItem>
-                    <MenuItem value={'enabled'}>Si</MenuItem>
+                    <MenuItem value={'disabled'}>Não</MenuItem>
+                    <MenuItem value={'enabled'}>Sim</MenuItem>
                   </Select>
                   <FormHelperText>
                     {loadingviewregister && 'Atualizando...'}
@@ -778,7 +778,7 @@ export default function Options(props) {
 			  
 			                <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
-                  <InputLabel id='trial-label'>¿Tiempo de prueba?</InputLabel>
+                  <InputLabel id='trial-label'>Tempo de prova?</InputLabel>
                   <Select
                     labelId='trial-label'
                     value={trial}
@@ -817,7 +817,7 @@ export default function Options(props) {
         >
 {/*           <Tab
 
-            label="INTEGRACIONES" /> */}
+            label="INTEGRAÇÕES" /> */}
 
         </Tabs>
 
@@ -842,7 +842,7 @@ export default function Options(props) {
               id="HubNotificaMe"
               name="HubNotificaMe"
               margin="dense"
-              label="Token Account"
+              label="Token da Conta"
               variant="outlined"
               value={HubNotificaMeType}
               onChange={async (e) => {
@@ -851,7 +851,7 @@ export default function Options(props) {
             >
             </TextField>
             <FormHelperText>
-              {loadingHubNotificaMeType && "Actualizando..."}
+              {loadingHubNotificaMeType && "Atualizando..."}
             </FormHelperText>
           </FormControl>
         </Grid>

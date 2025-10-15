@@ -48,7 +48,7 @@ export default function AddressForm(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-          Necesitaremos algunas informaciones
+          Precisaremos de algumas informações
       </Typography>
       <Grid container spacing={3}>
 
