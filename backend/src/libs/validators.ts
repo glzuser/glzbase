@@ -1,12 +1,12 @@
 /**
- * Clase utilitaria para validación de payloads en eventos WebSocket
+ * Classe utilitária para validação de payloads em eventos WebSocket
  */
 export class PayloadValidator {
   /**
-   * Valida el payload de un evento WebSocket
-   * @param eventName Nombre del evento
-   * @param payload Datos del evento
-   * @throws Error si el payload es inválido
+   * Valida o payload de um evento WebSocket
+   * @param eventName Nome do evento
+   * @param payload Dados do evento
+   * @throws Error se o payload for inválido
    */
   static validateEventPayload(eventName: string, payload: any): void {
     switch (eventName) {
@@ -22,48 +22,48 @@ export class PayloadValidator {
         
       case 'joinNotification':
       case 'leaveNotification':
-        // Eventos sin payload
+        // Eventos sem payload
         break;
         
       default:
-        // Para otros eventos, agregar validaciones específicas según sea necesario
+        // Para outros eventos, adicionar validações específicas conforme necessário
         break;
     }
   }
   
   /**
-   * Valida el ID del ticket
-   * @param ticketId ID del ticket
-   * @throws Error si el ID es inválido
+   * Valida o ID do ticket
+   * @param ticketId ID do ticket
+   * @throws Error se o ID for inválido
    */
   private static validateTicketId(ticketId: any): void {
     if (typeof ticketId !== 'string') {
-      throw new Error('El ID del ticket debe ser una cadena');
+      throw new Error('O ID do ticket deve ser uma string');
     }
     
     if (ticketId === 'undefined' || ticketId === 'null' || !ticketId) {
-      throw new Error('El ID del ticket no puede estar vacío');
+      throw new Error('O ID do ticket não pode estar vazio');
     }
     
-    // Evitar IDs muy largos para prevenir ataques de DoS
+    // Evitar IDs muito longos para prevenir ataques de DoS
     if (ticketId.length > 100) {
-      throw new Error('El ID del ticket es demasiado largo');
+      throw new Error('O ID do ticket é muito longo');
     }
   }
   
   /**
-   * Valida el estado del ticket
-   * @param status Estado del ticket
-   * @throws Error si el estado es inválido
+   * Valida o status do ticket
+   * @param status Status do ticket
+   * @throws Error se o status for inválido
    */
   private static validateTicketStatus(status: any): void {
     if (typeof status !== 'string') {
-      throw new Error('El estado debe ser una cadena');
+      throw new Error('O status deve ser uma string');
     }
     
     const validStatuses = ['open', 'pending', 'closed'];
     if (!validStatuses.includes(status)) {
-      throw new Error(`\x1b[31mEstado inválido: ${status}\x1b[0m`);
+      throw new Error(`\u001b[31mStatus inválido: ${status}\u001b[0m`);
     }
   }
 }

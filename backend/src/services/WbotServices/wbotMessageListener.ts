@@ -303,7 +303,7 @@ export const sendMessageImage = async (
     sentMessage = await wbot.sendMessage(
       `${contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"}`,
       {
-        text: formatBody('No pude enviar el PDF, ¡intenta nuevamente!', contact)
+        text: formatBody('Não consegui enviar o PDF, tente novamente!', contact)
       }
     );
   }
@@ -331,7 +331,7 @@ export const sendMessageLink = async (
   } catch (error) {
     sentMessage = await wbot.sendMessage(
       `${contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"}`, {
-        text: formatBody('No pude enviar el PDF, ¡intenta nuevamente!', contact)
+        text: formatBody('Não consegui enviar o PDF, tente novamente!', contact)
     }
     );
   }
@@ -418,13 +418,13 @@ export const getBodyMessage = (msg: proto.IWebMessageInfo): string | null => {
 
     if (!objKey) {
       // Muestra una advertencia si no se encontró el tipo correspondiente
-      logger.warn(`#### No se encontró el tipo 152: ${type}
+      logger.warn(`#### Não foi encontrado o tipo 152: ${type}
       ${JSON.stringify(msg)}`);
       // Envía información adicional a Sentry para facilitar el rastreo
       Sentry.setExtra("Mensaje", { BodyMsg: msg.message, msg, type });
       // Captura una excepción indicando que se encontró un nuevo tipo de mensaje
       Sentry.captureException(
-        new Error("Nuevo tipo de mensaje en getTypeMessage")
+        new Error("Novo tipo de mensagem em getTypeMessage")
       );
     }
     return types[type];
@@ -510,7 +510,7 @@ const downloadMedia = async (msg: proto.IWebMessageInfo) => {
       {}
     )
   } catch (err) {
-    console.error('Error al descargar el archivo multimedia:', err);
+    console.error('Erro ao baixar o arquivo multimídia:', err);
   }
 
   let filename = msg.message?.documentMessage?.fileName || "";
@@ -628,7 +628,7 @@ const convertTextToSpeechAndSaveToFile = (
               reject(error);
             });
         } else {
-          reject(new Error("No hay resultado del sintetizador"));
+          reject(new Error("Não há resultado do sintetizador"));
         }
         synthesizer.close();
       },
@@ -652,7 +652,7 @@ const convertWavToAnotherFormat = (
       .toFormat(toFormat)
       .on("end", () => resolve(outputPath))
       .on("error", (err: { message: any }) =>
-        reject(new Error(`Error al convertir el archivo: ${err.message}`))
+        reject(new Error(`Erro ao converter o arquivo: ${err.message}`))
       )
       .save(outputPath);
   });
@@ -662,7 +662,7 @@ const deleteFileSync = (path: string): void => {
   try {
     fs.unlinkSync(path);
   } catch (error) {
-    console.error("Error al eliminar el archivo:", error);
+    console.error("Erro ao excluir o arquivo:", error);
   }
 };
 
@@ -718,11 +718,11 @@ const handleOpenAi = async (
     limit: prompt.maxMessages
   });
 
-  const promptSystem = `En las respuestas utiliza el nombre ${sanitizeName(
-     contact.name || "Amigo(a)"
-   )} para identificar al cliente.\nTu respuesta debe usar como máximo ${prompt.maxTokens
-   } tokens y asegúrate de no cortar el final.\nSiempre que sea posible, menciona su nombre para que la atención sea más personalizada y cordial. Cuando la respuesta requiera una transferencia al sector de atención, comienza tu respuesta con 'Acción: Transferir al sector de atención'.\n
-   ${prompt.prompt}\n`;
+  const promptSystem = `Nas respostas, utilize o nome ${sanitizeName(
+    contact.name || "Amigo(a)"
+  )} para identificar o cliente.\nSua resposta deve usar no máximo ${prompt.maxTokens
+  } tokens e certifique-se de não cortar o final.\nSempre que possível, mencione seu nome para que o atendimento seja mais personalizado e cordial. Quando a resposta exigir uma transferência ao setor de atendimento, comece sua resposta com 'Ação: Transferir ao setor de atendimento'.\n
+  ${prompt.prompt}\n`;
 
   let messagesOpenAi: ChatCompletionRequestMessage[] = [];
 
@@ -754,10 +754,10 @@ const handleOpenAi = async (
 
     let response = chat.data.choices[0].message?.content;
 
-    if (response?.includes("Acción: Transferir al sector de atención")) {
+    if (response?.includes("Ação: Transferir ao setor de atendimento")) {
       await transferQueue(prompt.queueId, ticket, contact);
       response = response
-        .replace("Acción: Transferir al sector de atención", "")
+        .replace("Ação: Transferir ao setor de atendimento", "")
         .trim(); // Elimina la instrucción del mensaje final al cliente
     }
 
@@ -786,7 +786,7 @@ const handleOpenAi = async (
           deleteFileSync(`${publicFolder}/${fileNameWithOutExtension}.mp3`);
           deleteFileSync(`${publicFolder}/${fileNameWithOutExtension}.wav`);
         } catch (error) {
-          console.log(`Error al responder con audio: ${error}`);
+          console.log(`Erro ao responder com áudio: ${error}`);
         }
       });
     }
@@ -820,10 +820,10 @@ const handleOpenAi = async (
      });
      let response = chat.data.choices[0].message?.content;
 
-     if (response?.includes("Acción: Transferir al sector de atención")) {
+     if (response?.includes("Ação: Transferir ao setor de atendimento")) {
        await transferQueue(prompt.queueId, ticket, contact);
        response = response
-         .replace("Acción: Transferir al sector de atención", "")
+         .replace("Ação: Transferir ao setor de atendimento", "")
          .trim(); // Limpia la instrucción del mensaje antes de enviarlo al cliente
      }
      if (prompt.voice === "texto") {
@@ -851,7 +851,7 @@ const handleOpenAi = async (
            deleteFileSync(`${publicFolder}/${fileNameWithOutExtension}.mp3`);
            deleteFileSync(`${publicFolder}/${fileNameWithOutExtension}.wav`);
          } catch (error) {
-           console.log(`Error al responder con audio: ${error}`);
+           console.log(`Erro ao responder com áudio: ${error}`);
         }
       });
     }
@@ -905,26 +905,26 @@ const verifyMediaMessage = async (
       "base64"
     );
 
-    // Espera hasta que termine la conversión o se determine que no es necesaria
+    // Aguarda até que termine a conversão ou se determine que não é necessária
     await new Promise<void>((resolve, reject) => {
-      // Verifica si el archivo es del tipo .ogg
+      // Verifica se o arquivo é do tipo .ogg
       if (media.filename.includes('.ogg')) {
-        // Si es .ogg, usa ffmpeg para convertirlo a formato .mp3
+        // Se for .ogg, usa ffmpeg para convertê-lo ao formato .mp3
         ffmpeg(folder + '/' + media.filename)
           .toFormat('mp3')
-          .save((folder + '/' + media.filename).replace('.ogg', '.mp3')) // Guarda el archivo con extensión .mp3
+          .save((folder + '/' + media.filename).replace('.ogg', '.mp3')) // Salva o arquivo com extensão .mp3
           .on('end', () => {
-            logger.info('¡Conversión concluida!');
-            resolve(); // Finaliza la promesa exitosamente
+            logger.info('Conversão concluída!');
+            resolve(); // Finaliza a promessa com sucesso
           })
           .on('error', (err) => {
-            logger.error('Error durante la conversión:', err);
-            reject(err); // Finaliza la promesa con error
+            logger.error('Erro durante a conversão:', err);
+            reject(err); // Finaliza a promessa com erro
           });
       } else {
-        // Si no es un archivo .ogg, no es necesario convertirlo
-        logger.info('No es necesario convertir el archivo. No es formato OGG.');
-        resolve(); // Finaliza la promesa inmediatamente
+        // Se não for um arquivo .ogg, não é necessário convertê-lo
+        logger.info('Não é necessário converter o arquivo. Não é formato OGG.');
+        resolve(); // Finaliza a promessa imediatamente
       }
     });
 
@@ -1104,17 +1104,17 @@ const isValidMsg = (msg: proto.IWebMessageInfo): boolean => {
       msgType === "listMessage" ||
       msgType === "viewOnceMessage";
 
-    // Si no se encontró el tipo de mensaje (ifType está vacío o indefinido)
+    // Se não foi encontrado o tipo de mensagem (ifType está vazio ou indefinido)
     if (!ifType) {
-    // Muestra una advertencia en los logs con detalles del tipo y contenido del mensaje
-    logger.warn(`#### No se encontró el tipo en isValidMsg: ${msgType}
+    // Mostra uma advertência nos logs com detalhes do tipo e conteúdo da mensagem
+    logger.warn(`#### Não foi encontrado o tipo em isValidMsg: ${msgType}
     ${JSON.stringify(msg?.message)}`);
 
-       // Envía información extra a Sentry para facilitar el rastreo del error
-       Sentry.setExtra("Mensaje", { BodyMsg: msg.message, msg, msgType });
+       // Envia informação extra ao Sentry para facilitar o rastreamento
+       Sentry.setExtra("Mensagem", { BodyMsg: msg.message, msg, msgType });
 
-       // Captura una excepción personalizada en Sentry para notificar que apareció un nuevo tipo de mensaje
-       Sentry.captureException(new Error("Nuevo tipo de mensaje en isValidMsg"));
+       // Captura uma exceção personalizada no Sentry para notificar que apareceu um novo tipo de mensagem
+       Sentry.captureException(new Error("Novo tipo de mensagem em isValidMsg"));
      }
 
     return !!ifType;
@@ -1227,11 +1227,11 @@ const verifyQueue = async (
 });
 
     const textMessage = {
-      text: formatBody(`\u200e${greetingMessage}\n\n${options}\n_Escriba_ *salir* _para cerrar el bot o repararlo_\n`, contact),
+      text: formatBody(`\u200e${greetingMessage}\n\n${options}\n_Digite_ *sair* _para fechar o bot ou repará-lo_\n`, contact),
     };
 
     let lastMsg = map_msg.get(contact.number);
-    let invalidOption = "Opción inválida, por favor, elija una opción válida.\n\n";
+    let invalidOption = "Opção inválida, por favor, escolha uma opção válida.\n\n";
 
     if (!lastMsg?.msg || getBodyMessage(msg).includes('#') || textMessage.text === 'concluido' || lastMsg.msg !== textMessage.text && !lastMsg.invalid_option) {
       const sendMsg = await wbot.sendMessage(
@@ -1847,14 +1847,14 @@ export const handleMessageIntegration = async (
 
 if (queueIntegration.type === "n8n" || queueIntegration.type === "webhook") {
   if (!queueIntegration?.urlN8N) {
-    logger.error(`No se proporcionó una URL válida para la integración ${queueIntegration.type} (ID: ${queueIntegration.id})`);
-    throw new Error("URL de integración n8n/webhook no proporcionada");
+    logger.error(`Não foi fornecida uma URL válida para a integração ${queueIntegration.type} (ID: ${queueIntegration.id})`);
+    throw new Error("URL de integração n8n/webhook não fornecida");
   }
   // Validar que la URL sea un formato válido
   const urlRegex = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
   if (!urlRegex.test(queueIntegration.urlN8N)) {
-    logger.error(`URL inválida para integración ${queueIntegration.type}: ${queueIntegration.urlN8N}`);
-    throw new Error("URL de integración n8n/webhook inválida");
+    logger.error(`URL inválida para integração ${queueIntegration.type}: ${queueIntegration.urlN8N}`);
+    throw new Error("URL de integração n8n/webhook inválida");
   }
   const options = {
     method: "POST",
@@ -1867,27 +1867,27 @@ if (queueIntegration.type === "n8n" || queueIntegration.type === "webhook") {
       try {
   request(options, function (error, response) {
     if (error) {
-      logger.error(`Error al enviar solicitud a n8n/webhook (${queueIntegration.urlN8N}): ${error.message}`);
-      throw new Error(`Error en la solicitud a n8n/webhook: ${error.message}`);
+      logger.error(`Erro ao enviar solicitação para n8n/webhook (${queueIntegration.urlN8N}): ${error.message}`);
+      throw new Error(`Erro na solicitação para n8n/webhook: ${error.message}`);
     }
     if (response.statusCode !== 200) {
-      logger.error(`Respuesta no exitosa de n8n/webhook (${queueIntegration.urlN8N}): Código ${response.statusCode}, Mensaje: ${JSON.stringify(response.body)}`);
+      logger.error(`Resposta não bem-sucedida do n8n/webhook (${queueIntegration.urlN8N}): Código ${response.statusCode}, Mensagem: ${JSON.stringify(response.body)}`);
       if (response.statusCode === 404) {
-        logger.warn(`Webhook no registrado en n8n. Asegúrese de que el workflow esté activo y no en modo de prueba.`);
+        logger.warn(`Webhook não registrado no n8n. Certifique-se de que o workflow esteja ativo e não em modo de teste.`);
       }
-      throw new Error(`Respuesta no exitosa de n8n/webhook: Código ${response.statusCode}`);
+      throw new Error(`Resposta não bem-sucedida do n8n/webhook: Código ${response.statusCode}`);
     }
-    logger.info(`Respuesta exitosa de n8n/webhook (${queueIntegration.urlN8N}): ${JSON.stringify(response.body)}`);
+    logger.info(`Resposta bem-sucedida do n8n/webhook (${queueIntegration.urlN8N}): ${JSON.stringify(response.body)}`);
   });
 } catch (error) {
-  logger.error(`Error en integración ${queueIntegration.type}: ${error.message}`);
+  logger.error(`Erro na integração ${queueIntegration.type}: ${error.message}`);
   Sentry.captureException(error);
-  throw error; // Mantener el lanzamiento del error para mantener la funcionalidad existente
+  throw error; // Manter o lançamento do erro para manter a funcionalidade existente
 }
-// Mejora: Mejorado el manejo de errores y logging para integración n8n/webhook
+// Melhoria: Melhorado o manejo de erros e logging para integração n8n/webhook
 
   } else if (queueIntegration.type === "typebot") {
-    console.log("🤖 ENTRÓ EN EL TYPEBOT");
+    console.log("🤖 ENTROU NO TYPEBOT");
     // await typebots(ticket, msg, wbot, queueIntegration);
     await typebotListener({ ticket, msg, wbot, typebot: queueIntegration });
 
@@ -1995,28 +1995,28 @@ const handleMessage = async (
 
     await provider(ticket, msg, companyId, contact, wbot as WASocket);
 
-	// Mejora: Verificar si el mensaje es "salir" para detener el bot y cerrar el ticket
+	// Melhoria: Verificar se a mensagem é "salir" para parar o bot e fechar o ticket
 if (!msg.key.fromMe && !isGroup && bodyMessage?.toLowerCase().trim() === "salir") {
   try {
-    // Enviar mensaje de confirmación al usuario
-    const confirmationMessage = formatBody("Gracias por usar nuestro servicio. El bot ha sido detenido y tu ticket ha sido cerrado.", contact);
+    // Enviar mensagem de confirmação ao usuário
+    const confirmationMessage = formatBody("Obrigado por usar nosso serviço. O bot foi parado e seu ticket foi fechado.", contact);
     const sentMessage = await wbot.sendMessage(
       `${contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"}`,
       { text: confirmationMessage }
     );
     await verifyMessage(sentMessage, ticket, contact);
 
-    // Actualizar el ticket a estado "closed" manteniendo la cola
+    // Atualizar o ticket para estado "closed" mantendo a fila
     await UpdateTicketService({
       ticketData: { status: "closed" },
       ticketId: ticket.id,
       companyId: ticket.companyId
     });
 
-    // Actualizar ticket para reflejar el cierre
+    // Atualizar ticket para refletir o fechamento
     await ticket.reload();
 
-    // Emitir evento al frontend para reflejar el cierre del ticket
+    // Emitir evento ao frontend para refletir o fechamento do ticket
     const io = getIO();
     io.to(`company-${ticket.companyId}-open`)
       .to(`queue-${ticket.queueId}-open`)
@@ -2035,14 +2035,14 @@ if (!msg.key.fromMe && !isGroup && bodyMessage?.toLowerCase().trim() === "salir"
         ticketId: ticket.id
       });
 
-    // Registrar la acción en el log
-    logger.info(`Ticket ${ticket.id} cerrado por el usuario ${contact.number} al escribir "salir"`);
+    // Registrar a ação no log
+    logger.info(`Ticket ${ticket.id} fechado pelo usuário ${contact.number} ao escrever "salir"`);
 
-    // Detener el procesamiento del mensaje
+    // Parar o processamento da mensagem
     return;
   } catch (err) {
     Sentry.captureException(err);
-    logger.error(`Error al cerrar ticket con "salir": ${err}`);
+    logger.error(`Erro ao fechar ticket com "salir": ${err}`);
   }
 }
 
