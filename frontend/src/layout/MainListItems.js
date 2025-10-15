@@ -670,7 +670,7 @@ const MainListItems = (props) => {
           <ListItemIcon>
             <RotateRight style={{ color: 'white' }} />
           </ListItemIcon>
-          {i18n.t("mainDrawer.Logoutbar")}
+          {i18n.t("mainDrawer.listItems.Logoutbar")}
         </ListItem>
       </li>
     </div>
