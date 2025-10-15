@@ -115,7 +115,7 @@ export const ChatsUser = () => {
       );
       setTicketsData(data);
     } catch (error) {
-      toast.error("Error al obtener información de la conversación");
+      toast.error("Erro ao obter informações da conversa");
     }
   };
 
@@ -135,7 +135,7 @@ export const ChatsUser = () => {
             onChange={(newValue) => {
               setInitialDate(newValue);
             }}
-            label="Inicio"
+            label="Início"
             renderInput={(params) => (
               <TextField fullWidth {...params} sx={{ width: "20ch" }} />
             )}

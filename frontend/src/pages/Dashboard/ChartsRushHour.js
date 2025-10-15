@@ -241,7 +241,7 @@ const ChartsRushHour = () => {
 
   const companyId = localStorage.getItem("companyId");
 
-  const [finalDate, setFinalDate] = useState(getLastDayOfMonth(new Date()));
+  const [finalDate, setFimalDate] = useState(getLastDayOfMonth(new Date()));
   const [initialDate, setInitialDate] = useState(
     getFirstDayOfMonth(new Date())
   );
@@ -263,7 +263,7 @@ const ChartsRushHour = () => {
       setChartData(data);
     } catch (err) {
       console.log(err);
-      toast.error("Error al obtener información de los atendimientos");
+      toast.error("Erro ao obter informações dos atendimentos");
     }
   }
 
@@ -274,7 +274,7 @@ const ChartsRushHour = () => {
         : 0,
     datasets: [
       {
-        label: "Cantidad",
+        label: "Quantidade",
         data:
           chartData.length > 0
             ? chartData.map((item) => item.message_count)
@@ -292,7 +292,7 @@ const ChartsRushHour = () => {
       x: {
         title: {
           display: true,
-          text: "Hora del Día",
+          text: "Hora do Dia",
         },
       },
       y: {
@@ -324,10 +324,10 @@ const ChartsRushHour = () => {
     <Grid item xs={12} style={{ marginTop: 8, marginBottom: 8 }}>
       <Paper className={classes.fixedHeightPaper2}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Hora Pico - Intercambio de Mensajes
+          Hora do Pico - Troca de Mensagens
         </Typography>
         <span style={{ fontSize: 13, color: "#bcbcbc" }}>
-          Cantidad de mensajes recibidos y enviados en cada hora del día.
+          Quantidade de mensagens recebidas e enviadas em cada hora do dia.
         </span>
         <Stack
           direction={"row"}
@@ -344,7 +344,7 @@ const ChartsRushHour = () => {
               onChange={(newValue) => {
                 setInitialDate(newValue);
               }}
-              label="Inicio"
+              label="Início"
               renderInput={(params) => (
                 <TextField fullWidth {...params} sx={{ width: "20ch" }} />
               )}
@@ -358,9 +358,9 @@ const ChartsRushHour = () => {
             <DatePicker
               value={finalDate}
               onChange={(newValue) => {
-                setFinalDate(newValue);
+                setFimalDate(newValue);
               }}
-              label="Fin"
+              label="Fim"
               renderInput={(params) => (
                 <TextField fullWidth {...params} sx={{ width: "20ch" }} />
               )}

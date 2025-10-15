@@ -105,7 +105,7 @@ export const ChartsDate = () => {
             const { data } = await api.get(`/dashboard/ticketsDay?initialDate=${format(initialDate, 'yyyy-MM-dd')}&finalDate=${format(finalDate, 'yyyy-MM-dd')}&companyId=${companyId}`);
             setTicketsData(data);
         } catch (error) {
-            toast.error('Error al buscar la información de los tickets');
+            toast.error('Erro ao buscar as informações dos tickets');
         }
     }
 
@@ -121,7 +121,7 @@ export const ChartsDate = () => {
                     <DatePicker
                         value={initialDate}
                         onChange={(newValue) => { setInitialDate(newValue) }}
-                        label="Inicio"
+                        label="Início"
                         renderInput={(params) => <TextField fullWidth {...params} sx={{ width: '20ch' }} />}
 
                     />

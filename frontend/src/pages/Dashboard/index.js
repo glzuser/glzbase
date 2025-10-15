@@ -206,7 +206,7 @@ const Dashboard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <TextField
               fullWidth
-              label="Fecha Inicial"
+              label="Data Inicial"
               type="date"
               value={dateFrom}
               onChange={(e) => setDateFrom(e.target.value)}
@@ -217,7 +217,7 @@ const Dashboard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <TextField
               fullWidth
-              label="Fecha Final"
+              label="Data Final"
               type="date"
               value={dateTo}
               onChange={(e) => setDateTo(e.target.value)}
@@ -264,7 +264,7 @@ const Dashboard = () => {
                 <div className={classes.cardContent}>
                   <div className={classes.cardText}>
                     <Typography variant="subtitle2" className={classes.cardTitle}>
-                      Conexiones activas
+                      Conexões ativas
                     </Typography>
                     <Typography variant="h4" className={classes.cardValue}>
                       {counters.totalWhatsappSessions || 0}
@@ -335,7 +335,7 @@ const Dashboard = () => {
               <div className={classes.cardContent}>
                 <div className={classes.cardText}>
                   <Typography variant="subtitle2" className={classes.cardTitle}>
-                    Contactos
+                    Contatos
                   </Typography>
                   <Typography variant="h4" className={classes.cardValue}>
                     {GetContacts(true) || 0}
@@ -411,7 +411,7 @@ const Dashboard = () => {
                     onChange={(e) => handleChangeFilterType(e.target.value)}
                     label="Tipo de Filtro"
                   >
-                    <MenuItem value={1}>Filtro por Fecha</MenuItem>
+                    <MenuItem value={1}>Filtro por Data</MenuItem>
                     <MenuItem value={2}>Filtro por Período</MenuItem>
                   </Select>
                 </FormControl>

@@ -25,7 +25,7 @@ import { has, head, isArray } from "lodash";
 import { toast } from "react-toastify";
 import useCompanies from "../../hooks/useCompanies";
 import { useDate } from "../../hooks/useDate";
-import usePlanos from "../../hooks/usePlanos";
+import usePlans from "../../hooks/usePlans";
 import api from "../../services/api";
 import ModalUsers from "../ModalUsers";
 
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 export function CompanyForm(props) {
   const { onSubmit, onDelete, onCancel, initialValue, loading } = props;
   const classes = useStyles();
-  const [plans, setPlanos] = useState([]);
+  const [plans, setPlans] = useState([]);
   const [modalUser, setModalUser] = useState(false);
   const [firstUser, setFirstUser] = useState({});
 
@@ -88,12 +88,12 @@ export function CompanyForm(props) {
     ...initialValue,
   });
 
-  const { list: listPlanos } = usePlanos();
+  const { list: listPlans } = usePlans();
 
   useEffect(() => {
     async function fetchData() {
-      const list = await listPlanos();
-      setPlanos(list);
+      const list = await listPlans();
+      setPlans(list);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -512,11 +512,11 @@ export default function CompaniesManager() {
   });
 
   useEffect(() => {
-    loadPlanos();
+    loadPlans();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadPlanos = async () => {
+  const loadPlans = async () => {
     setLoading(true);
     try {
       const companyList = await list();
@@ -535,7 +535,7 @@ export default function CompaniesManager() {
       } else {
         await save(data);
       }
-      await loadPlanos();
+      await loadPlans();
       handleCancel();
       toast.success("Operação realizada com sucesso!");
     } catch (e) {
@@ -550,7 +550,7 @@ export default function CompaniesManager() {
     setLoading(true);
     try {
       await remove(record.id);
-      await loadPlanos();
+      await loadPlans();
       handleCancel();
       toast.success("Operação realizada com sucesso!");
     } catch (e) {
