@@ -60,7 +60,7 @@ const ShowTicketOpenModal = ({ isOpen, handleClose, ticketData, user, queue }) =
           color="secondary"
           variant="outlined"
         >
-          Cerrar
+          Fechar
         </Button>
         {ticketData?.id && (
           <Button 

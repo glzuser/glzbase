@@ -182,7 +182,7 @@ const EditMessageModal = ({ open, onClose, onSave, message }) => {
        <IconButton edge="start" color="inherit" onClick={() => onClose(false)} aria-label="close">
           <CloseIcon />
         </IconButton>
-         Editar Mensaje
+         Editar Mensagem
         </DialogTitle>
       <DialogContent style={{ padding: "0px"}}>
         <Box>
@@ -223,7 +223,7 @@ const EditMessageModal = ({ open, onClose, onSave, message }) => {
                 style={{ padding: "15px 0px 15px 15px", flex: 1 }}
                 multiline
                 maxRows={6}
-                placeholder="Search Google Maps"
+                placeholder="Buscar no Google Maps"
                 value={editedMessage}
                 onChange={(e) => setEditedMessage(e.target.value)}
                 inputProps={{ "aria-label": "search google maps" }}

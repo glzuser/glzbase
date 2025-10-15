@@ -76,7 +76,7 @@ const ShowTicketLogModal = ({ isOpen, handleClose, ticketId }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cerrar
+          Fechar
         </Button>
       </DialogActions>
     </Dialog>

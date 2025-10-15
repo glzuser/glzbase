@@ -4,12 +4,12 @@ import TranslateIcon from "@material-ui/icons/Translate";
 import { i18n } from "../../translate/i18n";
 import { AuthContext } from "../../context/Auth/AuthContext";
 
-// Objeto con los datos de cada idioma (bandera + nombre)
+  
 const languageData = {
   "pt-BR": { flag: "🇧🇷", name: "Português (BR)" },
   "en": { flag: "🇺🇸", name: "English" },
   "es": { flag: "🇪🇸", name: "Español" },
-  "fr": { flag: "fr", name: "Frances" }
+  "fr": { flag: "fr", name: "Francês" }
 };
 
 const UserLanguageSelector = ({ iconOnly = true }) => {
@@ -26,16 +26,16 @@ const UserLanguageSelector = ({ iconOnly = true }) => {
 
   const handleChangeLanguage = async (language) => {
     try {
-      await i18n.changeLanguage(language); // Cambia el idioma inmediatamente
-      localStorage.setItem("language", language); // Guarda la preferencia
+  
+      await i18n.changeLanguage(language); // Muda o idioma imediatamente
     } catch (error) {
-      console.error("Error al cambiar idioma:", error);
+      console.error("Erro ao mudar idioma:", error);
     }
     handleCloseLanguageMenu();
     window.location.reload(false);
   };
 
-  // Obtiene el idioma actual o usa 'es' como predeterminado
+  // Objeto com os dados de cada idioma // Obtém o idioma atual ou usa 'es' como padrão
   const currentLanguage = user?.language || i18n.language || "es";
 
   return (
@@ -43,7 +43,7 @@ const UserLanguageSelector = ({ iconOnly = true }) => {
       <IconButton
         color="inherit"
         onClick={handleOpenLanguageMenu}
-        aria-label="Seleccionar idioma"
+        aria-label="Selecionar idioma"
       >
         <TranslateIcon />
         <span style={{ fontSize: "1.2rem", marginRight: 12, paddingLeft: "10px" }}>

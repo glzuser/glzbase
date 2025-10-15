@@ -81,7 +81,7 @@ const Ticket = () => {
 
           const queueAllowed = queues.find((q) => q.id === queueId);
           if (queueAllowed === undefined && profile !== "admin") {
-            toast.error("Acceso no permitido");
+            toast.error("Acesso não permitido");
             history.push("/tickets");
             return;
           }

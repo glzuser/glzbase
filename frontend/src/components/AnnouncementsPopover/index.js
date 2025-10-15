@@ -80,7 +80,7 @@ function AnnouncementDialog({ announcement, open, handleClose }) {
       </DialogContent>
       <DialogActions>
         <Button onClick={() => handleClose()} color="primary" autoFocus>
-          Cerrar
+          Close
         </Button>
       </DialogActions>
     </Dialog>
@@ -326,7 +326,7 @@ export default function AnnouncementsPopover() {
                 </ListItem>
               ))}
             {isArray(announcements) && announcements.length === 0 && (
-              <ListItemText primary="Sin Notificaciones" />
+              <ListItemText primary="Sem Notificações" />
             )}
           </List>
         </Paper>

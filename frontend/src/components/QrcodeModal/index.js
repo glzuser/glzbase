@@ -163,37 +163,37 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
         <Box className={classes.contentContainer}>
           <Box className={classes.instructions}>
             <Typography variant="h6" gutterBottom style={{ fontWeight: 600, marginBottom: 24 }}>
-              Cómo conectar tu WhatsApp:
+              Como conectar seu WhatsApp:
             </Typography>
             
             <Box className={classes.step}>
               <Typography variant="body1" color="textPrimary">
-                <strong>1.</strong> Abre WhatsApp en tu celular
+                <strong>1.</strong> Abra o WhatsApp no seu celular
               </Typography>
             </Box>
             
             <Box className={classes.step}>
               <MoreVertIcon fontSize="small" />
               <Typography variant="body1" color="textPrimary">
-                <strong>2.</strong> Toca en <strong>Más opciones</strong> en Android o en <strong>Configuraciones</strong> en iPhone
+                <strong>2.</strong> Toque em Mais opções no Android ou em Configurações no iPhone
               </Typography>
             </Box>
             
             <Box className={classes.step}>
               <SettingsIcon fontSize="small" />
               <Typography variant="body1" color="textPrimary">
-                <strong>3.</strong> Toca en <strong>Dispositivos conectados</strong> y luego en <strong>Conectar dispositivos</strong>
+                <strong>3.</strong> Toque em Dispositivos conectados e depois em Conectar dispositivos
               </Typography>
             </Box>
             
             <Box className={classes.step}>
               <Typography variant="body1" color="textPrimary">
-                <strong>4.</strong> Apunta la cámara del celular hacia esta pantalla para escanear el QR Code
+                <strong>4.</strong> Aponte a câmera do celular para esta tela para escanear o QR Code
               </Typography>
             </Box>
             
             <Typography variant="caption" display="block" style={{ marginTop: 16, color: theme.palette.text.secondary }}>
-              El QR Code se actualiza automáticamente cada 60 segundos
+              O QR Code é atualizado automaticamente a cada 60 segundos
             </Typography>
           </Box>
           
@@ -213,7 +213,7 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
                   />
                   <img 
                     src="/static/whatsapp-logo.png" 
-                    alt="Logo de WhatsApp"
+                    alt="Logo do WhatsApp"
                     className={classes.whatsappLogo}
                   />
                 </Box>
@@ -224,7 +224,7 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
             ) : (
               <Box className={classes.loadingContainer}>
                 <Typography color="textSecondary">
-                  Esperando generación del QR Code...
+                  Aguardando geração do QR Code...
                 </Typography>
               </Box>
             )}

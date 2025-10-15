@@ -82,7 +82,7 @@ export default function TicketMessagesDialog({ open, handleClose, ticketId }) {
 
             const queueAllowed = queues.find((q) => q.id === queueId);
             if (queueAllowed === undefined && profile !== "admin") {
-              toast.error("Acceso no permitido");
+              toast.error("Acesso não permitido");
               history.push("/tickets");
               return;
             }
@@ -177,7 +177,7 @@ export default function TicketMessagesDialog({ open, handleClose, ticketId }) {
       <ReplyMessageProvider>{renderMessagesList()}</ReplyMessageProvider>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cerrar
+          Fechar
         </Button>
       </DialogActions>
     </Dialog>

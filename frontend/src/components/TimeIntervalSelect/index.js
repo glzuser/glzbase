@@ -41,11 +41,11 @@ const TimeIntervalSelect = ({ selectedInterval, onChange }) => {
 					}}
 				>
                 	<MenuItem key="0" value="0" selected>
-							DESABILITADO
+							DISABLED
 						</MenuItem>
 {Array.from({ length: 12 }, (_, i) => (i < 4 ? i + 2 : (i - 3) * 5)).map(interval => (
   <MenuItem key={interval} value={interval}>
-    {`${interval} minutos`}
+    {`${interval} minutes`}
   </MenuItem>
 ))}
 				</Select>
