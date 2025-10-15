@@ -16,7 +16,7 @@ const VersionLog = () => {
   useEffect(() => {
     async function fetchData() {
       if (!user.super) {
-        toast.error("¡Esta empresa no tiene permiso para acceder a esta página! Estamos redirigiéndolo.");
+        toast.error("Esta empresa não tem permissão para acessar esta página! Estamos redirecionando você.");
         setTimeout(() => {
           history.push(`/`)
         }, 1000);
@@ -37,7 +37,7 @@ const VersionLog = () => {
         setVersionLog(parsedLog);
         setLoading(false);
       } catch (error) {
-        setError('Error al cargar el registro de versiones.');
+        setError('Erro ao carregar o registro de versões.');
         setLoading(false);
       }
     };
@@ -77,12 +77,12 @@ const VersionLog = () => {
                     .replace(/\*([^\*]+)\*/g, '<em>$1</em>'); // Para itálico
   };
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', fontSize: '14px', maxWidth: '600px', margin: 'auto' }}>
-      <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '20px', fontSize: '18px' }}>Log de Versiones</h2>
+      <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '20px', fontSize: '18px' }}>Log de Versões</h2>
       {versionLog.map(({ version, changes }) => (
         <div key={version} style={{
           border: '1px solid #ddd',

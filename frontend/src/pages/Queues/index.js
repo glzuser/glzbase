@@ -153,7 +153,7 @@ const Queues = () => {
   const handleDeleteQueue = async (queueId) => {
     try {
       await api.delete(`/queue/${queueId}`);
-      toast.success(i18n.t("¡Fila eliminada con éxito!"));
+      toast.success(i18n.t("Fila eliminada com sucesso!"));
     } catch (err) {
       toastError(err);
     }
