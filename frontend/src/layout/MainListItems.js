@@ -341,7 +341,7 @@ const MainListItems = (props) => {
               )}
               <ListItemLink
                 to="/todolist"
-                primary={i18n.t("mainDrawer.tasks")}
+                primary={i18n.t("mainDrawer.listItems.tasks")}
                 icon={<TbPencilStar style={{ height: "25px", width: "25px", color: "#00BF63"}} />}
               />
               <ListItemLink
@@ -670,7 +670,7 @@ const MainListItems = (props) => {
           <ListItemIcon>
             <RotateRight style={{ color: 'white' }} />
           </ListItemIcon>
-          <ListItemText primary={i18n.t("mainDrawer.Logoutbar")} />
+          {i18n.t("mainDrawer.Logoutbar")}
         </ListItem>
       </li>
     </div>
