@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
   tab: {
-    backgroundColor: theme.palette.options,  //DARK MODE Whaticket SaaS//
+    backgroundColor: theme.palette.options,  //DARK MODE//
     borderRadius: 4,
     width: "100%",
     "& .MuiTab-wrapper": {
       color: theme.palette.fontecor,
-    },   //DARK MODE Whaticket SaaS//
+    },   //DARK MODE//
     "& .MuiTabs-flexContainer": {
       justifyContent: "center"
     }
@@ -157,9 +157,6 @@ export default function Options(props) {
   
   const [sendGreetingMessageOneQueues, setSendGreetingMessageOneQueues] = useState("disabled");
   const [loadingSendGreetingMessageOneQueues, setLoadingSendGreetingMessageOneQueues] = useState(false);
-  
-  const [HubNotificaMeType, setHubNotificaMeType] = useState("");
-  const [loadingHubNotificaMeType, setLoadingHubNotificaMeType] = useState(false);   
 
   const { update } = useSettings();
 
@@ -197,12 +194,12 @@ export default function Options(props) {
         setviewgroups(viewgroups.value);
       }
       
-	  {/*Whaticket SaaS SAUDAÇÃO*/}
+	  {/*SAUDAÇÃO*/}
       const SendGreetingAccepted = settings.find((s) => s.key === "sendGreetingAccepted");
       if (SendGreetingAccepted) {
         setSendGreetingAccepted(SendGreetingAccepted.value);
       }	 
-	  {/*Whaticket SaaS SAUDAÇÃO*/}	 
+	  {/*SAUDAÇÃO*/}	 
 	  
 	  {/*TRANSFERIR TICKET*/}	
 	  const SettingsTransfTicket = settings.find((s) => s.key === "sendMsgTransfTicket");
@@ -428,17 +425,6 @@ export default function Options(props) {
     toast.success("Operação atualizada com sucesso.");
     setLoadingSettingsTransfTicket(false);
   } 
-
-  async function handleChangeHubNotificaMe(value) {
-    setHubNotificaMeType(value);
-    setLoadingHubNotificaMeType(true);
-    await update({
-      key: "hubToken",
-      value,
-    });
-    toast.success("Operação atualizada com sucesso.");
-    setLoadingHubNotificaMeType(false);
-  } 
  
   async function handleChangeIPIxc(value) {
     setIpIxcType(value);
@@ -508,7 +494,7 @@ export default function Options(props) {
   }
   return (
     <>
-<Grid spacing={3} container>
+      <Grid spacing={3} container>
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="ratings-label">Avaliações</InputLabel>
@@ -519,8 +505,8 @@ export default function Options(props) {
                 handleChangeUserRating(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Desabilitadas</MenuItem>
+              <MenuItem value={"enabled"}>Habilitadas</MenuItem>
             </Select>
             <FormHelperText>
               {loadingUserRating && "Atualizando..."}
@@ -530,7 +516,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="schedule-type-label">
-            Gestão do horário comercial
+              Gerenciamento de Expediente
             </InputLabel>
             <Select
               labelId="schedule-type-label"
@@ -539,7 +525,7 @@ export default function Options(props) {
                 handleScheduleType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Desativado</MenuItem>
+              <MenuItem value={"disabled"}>Desabilitado</MenuItem>
               <MenuItem value={"queue"}>Fila</MenuItem>
               <MenuItem value={"company"}>Empresa</MenuItem>
             </Select>
@@ -551,7 +537,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="group-type-label">
-            Ignorar mensagens de grupo
+              Ignorar Mensagens de Grupos
             </InputLabel>
             <Select
               labelId="group-type-label"
@@ -560,8 +546,8 @@ export default function Options(props) {
                 handleGroupType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Desativado</MenuItem>
+              <MenuItem value={"enabled"}>Ativado</MenuItem>
             </Select>
             <FormHelperText>
               {loadingScheduleType && "Atualizando..."}
@@ -571,7 +557,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id="call-type-label">
-              Aceitar Chamadas
+              Aceitar Chamada
             </InputLabel>
             <Select
               labelId="call-type-label"
@@ -580,8 +566,8 @@ export default function Options(props) {
                 handleCallType(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Não Aceitar</MenuItem>
+              <MenuItem value={"enabled"}>Aceitar</MenuItem>
             </Select>
             <FormHelperText>
               {loadingCallType && "Atualizando..."}
@@ -620,8 +606,8 @@ export default function Options(props) {
                 handleSendGreetingAccepted(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Desabilitado</MenuItem>
+              <MenuItem value={"enabled"}>Habilitado</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSendGreetingAccepted && "Atualizando..."}
@@ -633,7 +619,7 @@ export default function Options(props) {
 		{/* ENVIAR MENSAGEM DE TRANSFERENCIA DE SETOR/ATENDENTE */}
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="sendMsgTransfTicket-label">Enviar mensagem de transferência de Fila/Agente</InputLabel>
+            <InputLabel id="sendMsgTransfTicket-label">Enviar mensagem de transferencia de Fila/agente</InputLabel>
             <Select
               labelId="sendMsgTransfTicket-label"
               value={SettingsTransfTicket}
@@ -641,8 +627,8 @@ export default function Options(props) {
                 handleSettingsTransfTicket(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Desabilitado</MenuItem>
+              <MenuItem value={"enabled"}>Habilitado</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSettingsTransfTicket && "Atualizando..."}
@@ -653,7 +639,7 @@ export default function Options(props) {
 		{/* ENVIAR SAUDAÇÃO QUANDO HOUVER SOMENTE 1 FILA */}
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
-            <InputLabel id="sendGreetingMessageOneQueues-label">Enviar saudação quando só 1 na Fila</InputLabel>
+            <InputLabel id="sendGreetingMessageOneQueues-label">Enviar saudação quando houver somente 1 fila</InputLabel>
             <Select
               labelId="sendGreetingMessageOneQueues-label"
               value={sendGreetingMessageOneQueues}
@@ -661,8 +647,8 @@ export default function Options(props) {
                 handleSendGreetingMessageOneQueues(e.target.value);
               }}
             >
-              <MenuItem value={"disabled"}>Não</MenuItem>
-              <MenuItem value={"enabled"}>Sim</MenuItem>
+              <MenuItem value={"disabled"}>Desabilitado</MenuItem>
+              <MenuItem value={"enabled"}>Habilitado</MenuItem>
             </Select>
             <FormHelperText>
               {loadingSendGreetingMessageOneQueues && "Atualizando..."}
@@ -672,7 +658,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id='viewclosed-label'>
-            O operador vê tickets fechados?
+              Operador Visualiza Tickets Fechados?
             </InputLabel>
             <Select
               labelId='viewclosed-label'
@@ -693,7 +679,7 @@ export default function Options(props) {
         <Grid xs={12} sm={12} md={12} item>
           <FormControl className={classes.selectContainer}>
             <InputLabel id='viewgroups-label'>
-            O operador visualiza Grupos?
+              Operador Visualiza Grupos?
             </InputLabel>
             <Select
               labelId='viewgroups-label'
@@ -713,7 +699,7 @@ export default function Options(props) {
 		
       </Grid>
 	  
-      <OnlyForSuperUser
+		<OnlyForSuperUser
 				user={currentUser}
 				yes={() => (
 				  <>
@@ -729,7 +715,7 @@ export default function Options(props) {
 						  marginTop: 20,
 						}}
 					  >
-						<Tab label='Configuração global' />
+						<Tab label='Configurações Globais' />
 					  </Tabs>
 					</Grid>
 
@@ -737,7 +723,7 @@ export default function Options(props) {
             <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
                   <InputLabel id='allowregister-label'>
-                  É permitido o registro (inscrição)?
+                    Registro (Inscrição) Permitida?
                   </InputLabel>
                   <Select
                     labelId='allowregister-label'
@@ -758,7 +744,7 @@ export default function Options(props) {
 				  <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
                   <InputLabel id='viewregister-label'>
-                  Registro (Inscrição) Visível?
+                    Registro (Inscrição) Visível?
                   </InputLabel>
                   <Select
                     labelId='viewregister-label'
@@ -778,7 +764,7 @@ export default function Options(props) {
 			  
 			                <Grid xs={12} sm={12} md={12} item>
                 <FormControl className={classes.selectContainer}>
-                  <InputLabel id='trial-label'>Tempo de prova?</InputLabel>
+                  <InputLabel id='trial-label'>Tempo de Trial?</InputLabel>
                   <Select
                     labelId='trial-label'
                     value={trial}
@@ -815,52 +801,15 @@ export default function Options(props) {
             marginTop: 20
           }}
         >
-{/*           <Tab
+          <Tab
 
-            label="INTEGRAÇÕES" /> */}
+            label="INTEGRAÇÕES" />
 
         </Tabs>
 
       </Grid>
-
-          {/*-----------------HUB NOTIFICAME-----------------*/}
-        <Grid spacing={3} container
-        style={{ marginBottom: 10 }}>
-        <Tabs
-          indicatorColor="primary"
-          textColor="primary"
-          scrollButtons="on"
-          variant="scrollable"
-          className={classes.tab}
-        >
-          <Tab label="HUB NOTIFICAME" />
-
-        </Tabs>
-        <Grid xs={12} sm={12} md={12} item>
-          <FormControl className={classes.selectContainer}>
-            <TextField
-              id="HubNotificaMe"
-              name="HubNotificaMe"
-              margin="dense"
-              label="Token da Conta"
-              variant="outlined"
-              value={HubNotificaMeType}
-              onChange={async (e) => {
-                handleChangeHubNotificaMe(e.target.value);
-              }}
-            >
-            </TextField>
-            <FormHelperText>
-              {loadingHubNotificaMeType && "Atualizando..."}
-            </FormHelperText>
-          </FormControl>
-        </Grid>
-      </Grid>
-      {/*-----------------HUB NOTIFICAME-----------------*/}
-
-      
       {/*-----------------IXC-----------------*/}
-    {/*   <Grid spacing={3} container
+      <Grid spacing={3} container
         style={{ marginBottom: 10 }}>
         <Tabs
           indicatorColor="primary"
@@ -912,9 +861,9 @@ export default function Options(props) {
             </FormHelperText>
           </FormControl>
         </Grid>
-      </Grid> */}
+      </Grid>
       {/*-----------------MK-AUTH-----------------*/}
-    {/*   <Grid spacing={3} container
+      <Grid spacing={3} container
         style={{ marginBottom: 10 }}>
         <Tabs
           indicatorColor="primary"
@@ -983,9 +932,9 @@ export default function Options(props) {
             </FormHelperText>
           </FormControl>
         </Grid>
-      </Grid> */}
+      </Grid>
       {/*-----------------ASAAS-----------------*/}
-     {/*  <Grid spacing={3} container
+      <Grid spacing={3} container
         style={{ marginBottom: 10 }}>
         <Tabs
           indicatorColor="primary"
@@ -1016,7 +965,7 @@ export default function Options(props) {
             </FormHelperText>
           </FormControl>
         </Grid>
-      </Grid> */}
+      </Grid>
     </>
   );
 }

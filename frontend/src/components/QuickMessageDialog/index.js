@@ -255,8 +255,8 @@ const QuickMessageDialog = ({ open, onClose, quickemessageId, reload }) => {
 											name="geral"
 											error={touched.geral && Boolean(errors.geral)}
 										  >
-											<MenuItem value={true}>Activo</MenuItem>
-                                            <MenuItem value={false}>Inactivo</MenuItem>
+											<MenuItem value={true}>Ativo</MenuItem>
+											<MenuItem value={false}>Inativo</MenuItem>
 										  </Field>
 										</FormControl>
 									  </Grid>

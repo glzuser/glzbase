@@ -50,16 +50,15 @@ export default function FooterButtons({ticket}) {
                 </IconButton>
                 </Tooltip>
                 <Tooltip title="Criar agendamento">
-                <IconButton onClick={handleOpenScheduleModal} size="small">
-                    <Calendar color={color} size={17} />
-                </IconButton>
+                    <IconButton onClick={handleOpenScheduleModal} size="small">
+                        <Calendar color={color} size={17} />
+                    </IconButton>
                 </Tooltip>
-                <Tooltip title="Ir para a conversa">   
-                <IconButton onClick={handleSelectTicket} size="small">
-                    <WhatsAppIcon style={{color: color}} fontSize="small" />
-                </IconButton>
+                <Tooltip title="Ir para conversa">   
+                    <IconButton onClick={handleSelectTicket} size="small">
+                        <WhatsAppIcon style={{color: color}} fontSize="small" />
+                    </IconButton>
                 </Tooltip>
-
 
                 <ScheduleModal
                     open={scheduleModalOpen}

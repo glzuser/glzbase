@@ -2,7 +2,7 @@ import {
   WASocket,
   BinaryNode,
   Contact as BContact,
-} from "@whiskeysockets/baileys";
+} from "baileys";
 import * as Sentry from "@sentry/node";
 
 import { Op } from "sequelize";
@@ -15,7 +15,8 @@ import Whatsapp from "../../models/Whatsapp";
 import { logger } from "../../utils/logger";
 import createOrUpdateBaileysService from "../BaileysServices/CreateOrUpdateBaileysService";
 import CreateMessageService from "../MessageServices/CreateMessageService";
-import { addContactsUpdateJob } from "./ProcessContactsUpdate";
+//import { addContactsUpdateJob } from "./ProcessContactsUpdate";
+
 
 type Session = WASocket & {
   id?: number;
@@ -32,15 +33,12 @@ const wbotMonitor = async (
   companyId: number
 ): Promise<void> => {
   try {
-  
-    //console.log(wbot);
-  
     wbot.ws.on("CB:call", async (node: BinaryNode) => {
       const content = node.content[0] as any;
 
       if (content.tag === "offer") {
         const { from, id } = node.attrs;
-        //console.log(`${from} is calling you with id ${id}`);
+
       }
 
       if (content.tag === "terminate") {
@@ -51,8 +49,8 @@ const wbotMonitor = async (
         if (sendMsgCall.value === "disabled") {
           await wbot.sendMessage(node.attrs.from, {
             text:
-              "*Mensaje Automático:*\n\nLas llamadas de voz y video están deshabilitadas para este WhatsApp, por favor envíe un mensaje de texto. Gracias",
-          });          
+              "*Mensagem Automática:*\n\nAs chamadas de voz e vídeo estão desabilitas para esse WhatsApp, favor enviar uma mensagem de texto. Obrigado",
+          });
 
           const number = node.attrs.from.replace(/\D/g, "");
 
@@ -62,7 +60,7 @@ const wbotMonitor = async (
 
           const ticket = await Ticket.findOne({
             where: {
-              contactId: contact?.id,
+              contactId: contact.id,
               whatsappId: wbot.id,
               //status: { [Op.or]: ["close"] },
               companyId
@@ -75,7 +73,7 @@ const wbotMonitor = async (
           const hours = date.getHours();
           const minutes = date.getMinutes();
 
-          const body = `Llamada de voz/vídeo perdida ${hours}:${minutes}`;
+          const body = `Chamada de voz/vídeo perdida às ${hours}:${minutes}`;
           const messageData = {
             id: content.attrs["call-id"],
             ticketId: ticket.id,
@@ -91,7 +89,7 @@ const wbotMonitor = async (
           await ticket.update({
             lastMessage: body,
           });
-          
+
 
           if(ticket.status === "closed") {
             await ticket.update({
@@ -104,22 +102,13 @@ const wbotMonitor = async (
       }
     });
 
-  	const allowupserts = await Setting.findOne({
-    	where: { key: "allowupserts", companyId: 1 },
-    });
-  
-  	
+    wbot.ev.on("contacts.upsert", async (contacts: BContact[]) => {
 
-    if (allowupserts && allowupserts.value === "enabled") {
-    
-    logger.info("Upserts Liberados");
-  
-    	wbot.ev.on("contacts.upsert", async (contacts: BContact[]) => {
-        console.log("🔄 UPSERT", contacts);
-      	  await addContactsUpdateJob(whatsapp?.id,contacts);
-    	});
-    
-    }
+      await createOrUpdateBaileysService({
+        whatsappId: whatsapp.id,
+        contacts,
+      });
+    });
 
   } catch (err) {
     Sentry.captureException(err);

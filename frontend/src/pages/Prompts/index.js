@@ -114,7 +114,7 @@ const Prompts = () => {
     async function fetchData() {
       const planConfigs = await getPlanCompany(undefined, companyId);
       if (!planConfigs.plan.useOpenAi) {
-        toast.error("¡Esta empresa no tiene permiso para acceder a esta página! Estamos redirigiéndolo.");
+        toast.error("Esta empresa não possui permissão para acessar essa página! Estamos lhe redirecionando.");
         setTimeout(() => {
           history.push(`/`)
         }, 1000);
@@ -191,13 +191,12 @@ const Prompts = () => {
     <MainContainer>
       {/* Box vermelha com o aviso */}
       <Paper className={classes.redBox} variant="outlined">
-          <Typography variant="body1">
-            <strong>Aviso importante:</strong> Para todos los usuarios de Whaticket que han notado una interrupción en el funcionamiento de OpenAI, nos gustaría aclarar que esto no es un error del sistema. OpenAI <strong>dejó de ofrecer crédito gratuito</strong> de $5 USD para nuevos registros, deberás recargar tu cuenta para continuar utilizando el servicio. Es importante tener en cuenta esta política para garantizar una experiencia fluida e ininterrumpida al utilizar OpenAI con Whaticket. Si notas que el servicio ha dejado de funcionar, verifica si tu crédito gratuito ha expirado y considera recargar tu cuenta si es necesario.
-          </Typography>
-           {/* Links úteis */}
         <Typography variant="body1">
-          <br />
-          <strong>Links Utiles:</strong>
+          <strong>Aviso Importante:</strong> Para todos os usuários do Whaticket que notaram uma interrupção no funcionamento do OpenAI, gostaríamos de esclarecer que isso não se trata de um erro do sistema. O OpenAI oferece um crédito gratuito de $5 USD para novos cadastros, porém, este benefício também está sujeito a um limite de tempo, geralmente em torno de três meses. Quando o crédito disponibilizado se esgota, é necessário recarregar a conta para continuar utilizando o serviço. É importante estar ciente dessa política para garantir uma experiência contínua e sem interrupções no uso do OpenAI com o Whaticket. Se você notou que o serviço parou de funcionar, verifique se seu crédito gratuito expirou e considere a recarga da conta, se necessário. Estamos à disposição para ajudar e esclarecer quaisquer dúvidas adicionais que possam surgir. Obrigado pela compreensão e continuaremos trabalhando para oferecer o melhor serviço possível aos nossos usuários.
+        </Typography>
+        {/* Links úteis */}
+        <Typography variant="body1">
+          <strong>Links Úteis:</strong>
           <br />
           Uso: <a href="https://platform.openai.com/usage">https://platform.openai.com/usage</a>
           <br />

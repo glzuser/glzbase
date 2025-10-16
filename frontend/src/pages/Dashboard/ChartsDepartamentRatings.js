@@ -36,7 +36,7 @@ import { format } from "date-fns";
 import { getRandomRGBA } from "../../utils/colors";
 import { getFirstDayOfMonth, getLastDayOfMonth } from "../../utils/dates";
 
-// Registrar componentes del Chart.js
+// Registrar componentes do Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -123,6 +123,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: "palette",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -135,6 +137,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: "palette",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -147,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -159,6 +164,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -171,6 +177,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -183,6 +190,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -195,6 +203,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -207,6 +216,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -219,6 +229,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -260,7 +271,7 @@ const ChartsDepartamentRatings = () => {
       setChartData(data);
     } catch (err) {
       console.log(err);
-      toast.error("Error al obtener la información de los atendimientos");
+      toast.error("Erro ao obter informações dos atendimentos");
     }
   }
 
@@ -268,7 +279,7 @@ const ChartsDepartamentRatings = () => {
     labels: chartData.length > 0 ? chartData.map((item) => item.name) : 0,
     datasets: [
       {
-        label: "Cantidad",
+        label: "Quantidade",
         data:
           chartData.length > 0
             ? chartData.map((item) => parseFloat(item.total_rate).toFixed(2))
@@ -319,10 +330,10 @@ const ChartsDepartamentRatings = () => {
     <Grid item xs={12} style={{ marginTop: 8, marginBottom: 8 }}>
       <Paper className={classes.fixedHeightPaper2}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Evaluaciones por Departamento/Fila
+          Avaliações por Departamento/Fila
         </Typography>
         <span style={{ fontSize: 13, color: "#bcbcbc" }}>
-          Cantidad de mensajes recibidos y enviados en cada hora del día.
+          Quantidade de mensagens recebidas e enviados em cada hora do dia.
         </span>
         <Stack
           direction={"row"}
@@ -355,7 +366,7 @@ const ChartsDepartamentRatings = () => {
               onChange={(newValue) => {
                 setFinalDate(newValue);
               }}
-              label="Fin"
+              label="Fim"
               renderInput={(params) => (
                 <TextField fullWidth {...params} sx={{ width: "20ch" }} />
               )}

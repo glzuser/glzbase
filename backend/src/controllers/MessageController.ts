@@ -78,7 +78,7 @@ export const store = async (req: Request, res: Response): Promise<Response> => {
 
   SetTicketMessagesAsRead(ticket);
 
-  console.log('📄 CUERPO DE LA SOLICITUD:', body);
+  console.log('bodyyyyyyyyyy:', body)
   if (medias) {
     await Promise.all(
       medias.map(async (media: Express.Multer.File, index) => {
@@ -115,7 +115,7 @@ export const send = async (req: Request, res: Response): Promise<Response> => {
   const messageData: MessageData = req.body;
   const medias = req.files as Express.Multer.File[];
 
-  console.log('📩 DATOS DEL MENSAJE:', messageData);
+  console.log('messageData;', messageData)
 
   try {
     const whatsapp = await Whatsapp.findByPk(whatsappId);
@@ -160,7 +160,7 @@ export const send = async (req: Request, res: Response): Promise<Response> => {
               whatsappId,
               data: {
                 number,
-                body: body ? formatBody(body, contact) : media.originalname,
+                body: body ? formatBody(body, contact) : "",
                 mediaPath: media.path,
                 fileName: media.originalname
               }
@@ -355,7 +355,7 @@ export const edit = async (req: Request, res: Response): Promise<Response> => {
   const { messageId } = req.params;
   const { companyId } = req.user;
   const { body }: MessageData = req.body;
-  console.log("📄 CUERPO:", body);
+  console.log(body)
   const { ticket , message } = await EditWhatsAppMessage({messageId, body});
 
   const io = getIO();

@@ -157,7 +157,7 @@ const handleFileChange = (event) => {
   } else {
     setFile(null);
     setSelectedFileName(null);
-    toast.error("Use apenas arquivos no formato PNG, ICO ou SVG!");
+    toast.error("Use somente arquivos em formato PNG, ICO ou SVG!");
   }
 };
 
@@ -172,11 +172,11 @@ const handleFileChange = (event) => {
       toast.warn("Escolha um arquivo!");
       return;
     }
-    
+
     if (!selectedOption) {
       toast.warn("Escolha um destino!");
       return;
-    }    
+    }
 
     const formData = new FormData();
     formData.append('file', file);
@@ -222,12 +222,13 @@ return (
               onChange={handleOptionChange}
               style={{ marginTop: 15, marginBottom: 15}}
             >
-              <MenuItem value="signup">Tela de registro</MenuItem>
+              <MenuItem value="signup">Tela de Registro</MenuItem>
               <MenuItem value="login">Tela de Login</MenuItem>
               <MenuItem value="interno">Logotipo Interno</MenuItem>
-			  <MenuItem value="favicon">Favicon.Ico</MenuItem>
-              <MenuItem value="favicon-256x256">Ícone 256x256</MenuItem>
-			  <MenuItem value="apple-touch-icon">Apple Touch Icon</MenuItem>
+	      <MenuItem value="logo_w">Logotipo Dark</MenuItem>
+	      <MenuItem value="favicon">Favicon.Ico</MenuItem>
+              {/*<MenuItem value="favicon-256x256">Ícone 256x256</MenuItem>
+	      <MenuItem value="apple-touch-icon">Apple Touch Icon</MenuItem>*/}
             </Select>
           </FormControl>
         </Grid>
@@ -242,7 +243,7 @@ return (
         			className={classes.fileInput}
                     style={{ marginTop: 15, marginBottom: 15 }}
       			/>
-      			{selectedFileName ? selectedFileName : 'Escolha imagem PNG'}
+      			{selectedFileName ? selectedFileName : 'Escolher imagem em PNG'}
     			</label>
   			</FormControl>
 		</Grid>

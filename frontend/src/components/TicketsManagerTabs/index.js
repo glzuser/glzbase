@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
   snackbar: {
     display: "flex",
     justifyContent: "space-between",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
     color: "white",
     borderRadius: 30,
     [theme.breakpoints.down("sm")]: {
@@ -439,7 +439,7 @@ const TicketsManagerTabs = () => {
                     isHoveredOpen ||
                     isHoveredClosed
                   }
-                  badgeContent={i18n.t("Nuevo")}
+                  badgeContent={i18n.t("Novo")}
                   classes={{ badge: classes.tabsBadge }}
                 >
                   <IconButton
@@ -559,7 +559,7 @@ const TicketsManagerTabs = () => {
               <Badge
                 className={classes.badge}
                 badgeContent={pendingCount}
-                color='secondary'
+                color='primary'
               >
                 {i18n.t('ticketsList.pendingHeader')}
               </Badge>

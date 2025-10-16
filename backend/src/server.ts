@@ -18,7 +18,7 @@ const server = app.listen(process.env.PORT, async () => {
     	const promise = StartAllWhatsAppsSessions(c.id);
     	allPromises.push(promise);
     }else{
-      logger.info(`❌ EMPRESA INACTIVA: ${c.id} | ${c.name}`);
+    	logger.info(`Empresa INATIVA: ${c.id} | ${c.name}`);
     }
   
   });
@@ -26,7 +26,7 @@ const server = app.listen(process.env.PORT, async () => {
   Promise.all(allPromises).then(() => {
     startQueueProcess();
   });
-  logger.info(`🚀 SERVIDOR INICIADO EN EL PUERTO: ${process.env.PORT}`);
+  logger.info(`Server started on port: ${process.env.PORT}`);
 });
 
 process.on("uncaughtException", err => {
@@ -47,11 +47,11 @@ process.on("unhandledRejection", (reason, p) => {
 
 cron.schedule("*/5 * * * *", async () => {  // De 1 minuto para 5 minutos
   try {
-    logger.info(`🚀 SERVICIO DE TRANSFERENCIA DE TICKETS INICIADO`);
+    logger.info(`Serviço de transferência de tickets iniciado`);
     await TransferTicketQueue();
   } catch (error) {
-    logger.error(`❌ ERROR EN EL CRON JOB:`, error);
-  }  
+    logger.error("Error in cron job:", error);
+  }
 });
 
 
@@ -63,10 +63,10 @@ gracefulShutdown(server, {
   signals: "SIGINT SIGTERM",
   timeout: 30000, // 30 seconds
   onShutdown: async () => {
-    logger.info("🔒 CERRANDO EL SERVIDOR DE MANERA SEGURA...");
-    // Agrega cualquier otro código de limpieza aquí, si es necesario
+    logger.info("Gracefully shutting down...");
+    // Add any other cleanup code here, if necessary
   },
   finally: () => {
-    logger.info("✅ APAGADO DEL SERVIDOR COMPLETADO.");
-  }  
+    logger.info("Server shutdown complete.");
+  }
 });

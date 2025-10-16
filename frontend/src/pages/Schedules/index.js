@@ -362,7 +362,7 @@ const Schedules = () => {
         <Tooltip title="Editar" placement="top">
           <EditIcon onClick={() => handleEditSchedule(event.resource.schedule)} />
         </Tooltip>
-        <Tooltip title="Borrar" placement="top">
+        <Tooltip title="Excluir" placement="top">
           <DeleteOutlineIcon 
             onClick={() => updateState({
               confirmModalOpen: true,

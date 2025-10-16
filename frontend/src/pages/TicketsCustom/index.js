@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: "column",
 	},
 	welcomeMsg: {
-		backgroundColor: theme.palette.boxticket, //DARK MODE Whaticket SaaS//
+		backgroundColor: theme.palette.boxticket, //DARK MODE//
 		display: "flex",
 		justifyContent: "space-evenly",
 		alignItems: "center",
@@ -73,7 +73,7 @@ const TicketsCustom = () => {
 								<div>
 									<center>
 										<img
-											style={{ margin: "0 auto", width: "30%" }}
+											style={{ margin: "0 auto", width: "80%" }}
 											src={`${logoImg}?r=${Math.random()}`}
 											alt={`${process.env.REACT_APP_NAME_SYSTEM}`}
 										/>

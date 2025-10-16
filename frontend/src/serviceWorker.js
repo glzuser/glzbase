@@ -6,10 +6,10 @@ export function register() {
 
       navigator.serviceWorker.register(swUrl)
         .then((registration) => {
-          console.log('¡Service worker registrado con éxito!', registration);
+          console.log('Service worker registrado com sucesso!', registration);
         })
         .catch((error) => {
-          console.error('Error durante el registro del service worker:', error);
+          console.error('Erro durante o registro do service worker:', error);
         });
     });
   }
@@ -22,7 +22,7 @@ export function unregister() {
         registration.unregister();
       })
       .catch((error) => {
-        console.error('Error al dar de baja al service worker:', error);
+        console.error('Erro durante o desregistro do service worker:', error);
       });
   }
 }

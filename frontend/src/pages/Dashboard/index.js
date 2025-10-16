@@ -264,7 +264,7 @@ const Dashboard = () => {
                 <div className={classes.cardContent}>
                   <div className={classes.cardText}>
                     <Typography variant="subtitle2" className={classes.cardTitle}>
-                      Conexões ativas
+                      Conexões Ativas
                     </Typography>
                     <Typography variant="h4" className={classes.cardValue}>
                       {counters.totalWhatsappSessions || 0}
@@ -301,7 +301,7 @@ const Dashboard = () => {
               <div className={classes.cardContent}>
                 <div className={classes.cardText}>
                   <Typography variant="subtitle2" className={classes.cardTitle}>
-                    En Conversa
+                    Em Conversa
                   </Typography>
                   <Typography variant="h4" className={classes.cardValue}>
                     {counters.supportHappening || 0}
@@ -318,7 +318,7 @@ const Dashboard = () => {
               <div className={classes.cardContent}>
                 <div className={classes.cardText}>
                   <Typography variant="subtitle2" className={classes.cardTitle}>
-                    En Espera
+                    Aguardando
                   </Typography>
                   <Typography variant="h4" className={classes.cardValue}>
                     {counters.supportPending || 0}
@@ -335,7 +335,7 @@ const Dashboard = () => {
               <div className={classes.cardContent}>
                 <div className={classes.cardText}>
                   <Typography variant="subtitle2" className={classes.cardTitle}>
-                    Contatos
+                    Novos Contatos
                   </Typography>
                   <Typography variant="h4" className={classes.cardValue}>
                     {GetContacts(true) || 0}

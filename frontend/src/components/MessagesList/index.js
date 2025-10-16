@@ -18,6 +18,7 @@ import {
   ExpandMore,
   GetApp,
   Reply,
+  KeyboardArrowDown,
 } from "@material-ui/icons";
 import AudioModal from "../AudioModal";
 import MarkdownWrapper from "../MarkdownWrapper";
@@ -262,6 +263,33 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.mode === 'light' ? '#2DDD7F' : '#1c1c1c',
     color: theme.mode === 'light' ? '#2DDD7F' : '#FFF',
   },
+  scrollToBottomButton: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
+    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+    zIndex: 1000,
+    transition: "all 0.3s ease",
+    opacity: 1,
+    "&:hover": {
+      backgroundColor: theme.palette.mode === 'light' ? '#f5f5f5' : '#424242',
+      transform: "scale(1.1)",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+    },
+    "&:active": {
+      transform: "scale(0.95)",
+    },
+  },
+  scrollToBottomButtonHidden: {
+    opacity: 0,
+    pointerEvents: "none",
+    transform: "scale(0.8)",
+    "&:hover": {
+      opacity: 0, // Garante que não apareça no hover quando escondido
+    },
+  },
 }));
 
 const reducer = (state, action) => {
@@ -317,20 +345,22 @@ const reducer = (state, action) => {
   }
 };
 
-const MessagesList = ({ ticket, ticketId, isGroup }) => {
+const MessagesList = ({ ticket, ticketId, isGroup, onMessagesLoad }) => {
   const classes = useStyles();
   const [messagesList, dispatch] = useReducer(reducer, []);
   const [pageNumber, setPageNumber] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const lastMessageRef = useRef();
-  const [contactPresence, setContactPresence] = useState("available");
   const [selectedMessage, setSelectedMessage] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
   const messageOptionsMenuOpen = Boolean(anchorEl);
   const currentTicketId = useRef(ticketId);
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const [showScrollToBottom, setShowScrollToBottom] = useState(false);
+  const messagesListRef = useRef();
   const socketManager = useContext(SocketContext);
+  const scrollTimeoutRef = useRef();
   const { setReplyingMessage } = useContext(ReplyMessageContext);
   const { showSelectMessageCheckbox } = useContext(ForwardMessageContext);
 
@@ -339,6 +369,12 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
     setPageNumber(1);
     currentTicketId.current = ticketId;
   }, [ticketId]);
+
+  useEffect(() => {
+    if (onMessagesLoad && messagesList.length > 0) {
+      onMessagesLoad(messagesList);
+    }
+  }, [messagesList, onMessagesLoad]);
 
   useEffect(() => {
     setLoading(true);
@@ -400,11 +436,28 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
 
     return () => {
       socket.disconnect();
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
     };
   }, [ticketId, ticket, socketManager]);
 
   const loadMore = () => {
-    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+    const messagesContainer = document.getElementById("messagesList");
+    const scrollHeightBefore = messagesContainer?.scrollHeight || 0;
+    
+    setPageNumber((prevPageNumber) => {
+      // Preserva a posição do scroll após carregar novas mensagens
+      setTimeout(() => {
+        if (messagesContainer) {
+          const scrollHeightAfter = messagesContainer.scrollHeight;
+          const scrollDiff = scrollHeightAfter - scrollHeightBefore;
+          messagesContainer.scrollTop += scrollDiff;
+        }
+      }, 100);
+      
+      return prevPageNumber + 1;
+    });
   };
 
   const scrollToBottom = () => {
@@ -414,20 +467,24 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
   };
 
   const handleScroll = (e) => {
-    if (!hasMore) return;
-    const { scrollTop } = e.currentTarget;
-
-    if (scrollTop === 0) {
-      document.getElementById("messagesList").scrollTop = 1;
+    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
+    
+    // Debounce para evitar múltiplas chamadas
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
     }
+    
+    scrollTimeoutRef.current = setTimeout(() => {
+      // Lógica para carregar mais mensagens antigas quando rolar para cima
+      if (hasMore && !loading && scrollTop < 100) {
+        console.log("Carregando mais mensagens antigas...", { hasMore, loading, scrollTop });
+        loadMore();
+      }
+    }, 100);
 
-    if (loading) {
-      return;
-    }
-
-    if (scrollTop < 50) {
-      loadMore();
-    }
+    // Lógica para mostrar/esconder botão de scroll to bottom (sem debounce para ser mais responsivo)
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+    setShowScrollToBottom(!isNearBottom);
   };
 
   const hanldeReplyMessage = (e, message) => {
@@ -456,9 +513,7 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
         descriptionLocation = message.body.split('|')[2]
   
       return <LocationPreview image={imageLocation} link={linkLocation} description={descriptionLocation} />
-    } else 
-    
-    if (message.mediaType === "contactMessage") {
+    } else if (message.mediaType === "contactMessage") {
       let array = message.body.split("\n");
       let obj = [];
       let contact = "";
@@ -701,7 +756,7 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 17" width="20" height="17">
                     <path fill="#df3333" d="M18.2 12.1c-1.5-1.8-5-2.7-8.2-2.7s-6.7 1-8.2 2.7c-.7.8-.3 2.3.2 2.8.2.2.3.3.5.3 1.4 0 3.6-.7 3.6-.7.5-.2.8-.5.8-1v-1.3c.7-1.2 5.4-1.2 6.4-.1l.1.1v1.3c0 .2.1.4.2.6.1.2.3.3.5.4 0 0 2.2.7 3.6.7.2 0 1.4-2 .5-3.1zM5.4 3.2l4.7 4.6 5.8-5.7-.9-.8L10.1 6 6.4 2.3h2.5V1H4.1v4.8h1.3V3.2z"></path>
-                   </svg> <span>Llamada de voz/vídeo perdida a las {format(parseISO(message.createdAt), "HH:mm")}</span>
+                  </svg> <span>Chamada de voz/vídeo perdida às {format(parseISO(message.createdAt), "HH:mm")}</span>
                 </div>
               </div>
             </React.Fragment>
@@ -712,25 +767,20 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
           return (
             <React.Fragment key={message.id}>
               {renderDailyTimestamps(message, index)}
-              {renderMessageDivider(message, index)}
               {renderNumberTicket(message, index)}
-              <div style={{alignItems: "flex-end", display: "inline-flex", marginBottom: "6px", position: "relative"}}>
-              <div style={{margin: "0 8px 0 0"}}>
-                <img style={{borderRadius: "50%",height: "28px",width: "28px"}} src={message.contact.profilePicUrl} alt="chatvia" />
-              </div>
+              {renderMessageDivider(message, index)}
               <div
+                id={`message-${message.id}`}
                 className={classes.messageLeft}
                 title={message.queueId && message.queue?.name}
                 onDoubleClick={(e) => hanldeReplyMessage(e, message)}
               >
                 {showSelectMessageCheckbox && (
                   <SelectMessageCheckbox
-                    // showSelectMessageCheckbox={showSelectMessageCheckbox}
                     message={message}
-                  // selectedMessagesList={selectedMessagesList}
-                  // setSelectedMessagesList={setSelectedMessagesList}
                   />
                 )}
+                
                 <IconButton
                   variant="contained"
                   size="small"
@@ -755,11 +805,10 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
                   </span>
                 )}
 
-                {/* aviso de mensagem apagado pelo contato */}
                 {message.isDeleted && (
                   <div>
                     <span className={"message-deleted"}
-                    >Este mensaje fue eliminado por el contacto &nbsp;
+                    >Essa mensagem foi apagada pelo contato &nbsp;
                       <Block
                         color="error"
                         fontSize="small"
@@ -769,47 +818,30 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
                   </div>
                 )}
 
-{(message.mediaUrl || message.mediaType === "locationMessage" || message.mediaType === "vcard" || message.mediaType === "contactMessage"
-                  //|| message.mediaType === "multi_vcard" 
+                {(message.mediaUrl || message.mediaType === "locationMessage" || message.mediaType === "vcard" || message.mediaType === "contactMessage"
                 ) && checkMessageMedia(message)}
-                <div className={classes.textContentItem}>
+                <div className={message.isEdited ? classes.textContentItemEdited : classes.textContentItem}>
                   {message.quotedMsg && renderQuotedMessage(message)}
                   {message.mediaType !== "reactionMessage" && (
                     <MarkdownWrapper>
-                      {message.mediaType === "locationMessage" || message.mediaType === "contactMessage" 
+                      {message.mediaType === "locationMessage" || message.mediaType === "contactMessage"
                         ? null
                         : message.body}
                     </MarkdownWrapper>
                   )}
-                  {message.quotedMsg && message.mediaType === "reactionMessage" && message.body && (
+                  {message.quotedMsg && message.mediaType === "reactionMessage" && (
                     <>
-                      <span style={{ marginLeft: "0px", display: 'flex', alignItems: 'center' }}>
+                      <span style={{ marginLeft: "0px" }}>
                         <MarkdownWrapper>
-                          {"_*" + (message.fromMe ? 'Usted' : (message?.contact?.name ?? 'Contacto')) + "*_ reaccionó... "}
+                          {"" + message?.contact?.name + " reagiu... " + message.body}
                         </MarkdownWrapper>
-                        <Badge 
-                          className={classes.badge}
-                          overlap="circular"
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                          }}
-                          badgeContent={
-                            <span style={{ fontSize: "1.2em", marginTop: "0", marginLeft: "5px" }}>
-                              {message.body}
-                            </span>
-                          }
-                        >
-                        </Badge>
                       </span>
-                      
                     </>
                   )}
-
-                   <span className={classes.timestamp}>
-                  {message.isEdited ? "Editada " + format(parseISO(message.createdAt), "HH:mm") : format(parseISO(message.createdAt), "HH:mm")}
-                    </span>
-                    </div>
+                                  
+                  <span className={classes.timestamp}>
+                    {message.isEdited ? "Editada " + format(parseISO(message.updatedAt || message.createdAt), "HH:mm") : format(parseISO(message.createdAt), "HH:mm")}
+                  </span>
                 </div>
               </div>
             </React.Fragment>
@@ -820,14 +852,17 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
               {renderDailyTimestamps(message, index)}
               {renderNumberTicket(message, index)}
               {renderMessageDivider(message, index)}
-              <div className={classes.messageRight}
-              onDoubleClick={(e) => hanldeReplyMessage(e, message)}
-            >
+              <div 
+                id={`message-${message.id}`}
+                className={classes.messageRight}
+                onDoubleClick={(e) => hanldeReplyMessage(e, message)}
+              >
               {showSelectMessageCheckbox && (
                 <SelectMessageCheckbox
                   message={message}
                 />
               )}
+              
                 <IconButton
                   variant="contained"
                   size="small"
@@ -849,7 +884,9 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
                 {(message.mediaUrl || message.mediaType === "locationMessage" || message.mediaType === "vcard" || message.mediaType === "contactMessage"
                 ) && checkMessageMedia(message)}
                 <div
-                  className={clsx(classes.textContentItem, {
+                  className={clsx({
+                    [classes.textContentItem]: !message.isEdited && !message.isDeleted,
+                    [classes.textContentItemEdited]: message.isEdited,
                     [classes.textContentItemDeleted]: message.isDeleted,
                   })}
                 >
@@ -861,35 +898,21 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
                     />
                   )}
                   {message.quotedMsg && renderQuotedMessage(message)}
-                  {message.mediaType !== "reactionMessage" && message.mediaType !== "locationMessage" && (
+                  {message.mediaType !== "reactionMessage" && message.mediaType !== "locationMessage" && message.mediaType !== "contactMessage" && (
                     <MarkdownWrapper>{message.body}</MarkdownWrapper>
                   )}
-         {message.quotedMsg && message.mediaType === "reactionMessage" && message.body && (
+                  {message.quotedMsg && message.mediaType === "reactionMessage" && (
                     <>
-                      <span style={{ marginLeft: "0px", display: 'flex', alignItems: 'center' }}>
+                      <span style={{ marginLeft: "0px" }}>
                         <MarkdownWrapper>
-                          {"_*" + (message.fromMe ? 'Usted' : (message?.contact?.name ?? 'Contacto')) + "*_ reaccionó... "}
+                          {"Você reagiu... " + message.body}
                         </MarkdownWrapper>
-                        <Badge 
-                          className={classes.badge}
-                          overlap="circular"
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                          }}
-                          badgeContent={
-                            <span style={{ fontSize: "1.2em", marginTop: "0", marginLeft: "5px" }}>
-                              {message.body}
-                            </span>
-                          }
-                        >
-                        </Badge>
                       </span>
                     </>
                   )}
                           
                   <span className={classes.timestamp}>
-                    {message.isEdited ? "Editada " + format(parseISO(message.createdAt), "HH:mm") : format(parseISO(message.createdAt), "HH:mm")}
+                    {message.isEdited ? "Editada " + format(parseISO(message.updatedAt || message.createdAt), "HH:mm") : format(parseISO(message.createdAt), "HH:mm")}
                     {renderMessageAck(message)}
                   </span>
                 </div>
@@ -916,34 +939,26 @@ const MessagesList = ({ ticket, ticketId, isGroup }) => {
         id="messagesList"
         className={classes.messagesList}
         onScroll={handleScroll}
+        ref={messagesListRef}
       >
         {messagesList.length > 0 ? renderMessages() : []}
-            {contactPresence === "composing" && (
-                <div className={classes.messageLeft}>
-                  <div className={classes.wave}>
-                      <span className={classes.dot}></span>
-                      <span className={classes.dot}></span>
-                      <span className={classes.dot}></span>
-                  </div>
-                </div>
-              )}
-              {contactPresence === "recording" && (
-                <div className={classes.messageLeft}>
-                  <div className={classes.wavebarsContainer}>
-                      <div className={clsx(classes.wavebars, classes.wavebar1)}></div>
-                      <div className={clsx(classes.wavebars, classes.wavebar2)}></div>
-                      <div className={clsx(classes.wavebars, classes.wavebar3)}></div>
-                      <div className={clsx(classes.wavebars, classes.wavebar4)}></div>
-                      <div className={clsx(classes.wavebars, classes.wavebar5)}></div>
-                  </div>
-                </div>
-              )}
       </div>
       {loading && (
         <div>
           <CircularProgress className={classes.circleLoading} />
         </div>
       )}
+      
+      {/* Botão de scroll para última mensagem */}
+      <IconButton
+        className={clsx(classes.scrollToBottomButton, {
+          [classes.scrollToBottomButtonHidden]: !showScrollToBottom
+        })}
+        onClick={scrollToBottom}
+        title="Ir para última mensagem"
+      >
+        <KeyboardArrowDown />
+      </IconButton>
     </div>
   );
 };

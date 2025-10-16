@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/node";
-import { WAMessage } from "@whiskeysockets/baileys";
+import { WAMessage } from "baileys";
 import AppError from "../../errors/AppError";
 import GetTicketWbot from "../../helpers/GetTicketWbot";
 import Message from "../../models/Message";
@@ -8,7 +8,7 @@ import { logger } from "../../utils/logger";
 import formatBody from "../../helpers/Mustache";
 
 import Queue from "bull";
-import { map_msg } from "../../utils/global";
+import { map_msg, buildContactAddress } from "../../utils/global";
 
 interface Request {
   body: string;
@@ -25,9 +25,9 @@ const SendWhatsAppMessage = async ({
 }: Request): Promise<WAMessage> => {
   let options = {};
   const wbot = await GetTicketWbot(ticket);
-  const number = `${ticket.contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"
-    }`;
-    console.log("🔢 NÚMERO", number);
+  console.log('ticket.contact', ticket.contact);
+  const number = buildContactAddress(ticket.contact, ticket.isGroup);
+  console.log("number", number);
   if (quotedMsg) {
     const chatMessages = await Message.findOne({
       where: {
@@ -81,7 +81,7 @@ const SendWhatsAppMessage = async ({
       }
     );
     await ticket.update({ lastMessage: formatBody(body, ticket.contact) });
-    console.log("📤 MENSAJE ENVIADO", sentMessage);
+    console.log("Message sent", sentMessage);
     return sentMessage;
   } catch (err) {
     Sentry.captureException(err);

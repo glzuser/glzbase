@@ -175,14 +175,14 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
             <Box className={classes.step}>
               <MoreVertIcon fontSize="small" />
               <Typography variant="body1" color="textPrimary">
-                <strong>2.</strong> Toque em Mais opções no Android ou em Configurações no iPhone
+                <strong>2.</strong> Toque em <strong>Mais opções</strong> no Android ou em <strong>Configurações</strong> no iPhone
               </Typography>
             </Box>
             
             <Box className={classes.step}>
               <SettingsIcon fontSize="small" />
               <Typography variant="body1" color="textPrimary">
-                <strong>3.</strong> Toque em Dispositivos conectados e depois em Conectar dispositivos
+                <strong>3.</strong> Toque em <strong>Dispositivos conectados</strong> e depois em <strong>Conectar dispositivos</strong>
               </Typography>
             </Box>
             
@@ -193,7 +193,7 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
             </Box>
             
             <Typography variant="caption" display="block" style={{ marginTop: 16, color: theme.palette.text.secondary }}>
-              O QR Code é atualizado automaticamente a cada 60 segundos
+              O QR Code atualiza automaticamente a cada 60 segundos
             </Typography>
           </Box>
           
@@ -213,7 +213,7 @@ const QrcodeModal = ({ open, onClose, whatsAppId }) => {
                   />
                   <img 
                     src="/static/whatsapp-logo.png" 
-                    alt="Logo do WhatsApp"
+                    alt="WhatsApp Logo"
                     className={classes.whatsappLogo}
                   />
                 </Box>

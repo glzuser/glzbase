@@ -1,4 +1,4 @@
-import { proto, WASocket } from "@whiskeysockets/baileys";
+import { proto, WASocket } from "baileys";
 // import cacheLayer from "../libs/cache";
 import { getIO } from "../libs/socket";
 import Message from "../models/Message";
@@ -47,7 +47,9 @@ const SetTicketMessagesAsRead = async (ticket: Ticket): Promise<void> => {
       }
     );
   } catch (err) {
-    logger.warn(`⚠️ NO SE PUDIERON MARCAR LOS MENSAJES COMO LEÍDOS. ¿QUIZÁ SESIÓN DE WHATSAPP DESCONECTADA? ERR: ${err}`);
+    logger.warn(
+      `Could not mark messages as read. Maybe whatsapp session disconnected? Err: ${err}`
+    );
   }
 
   const io = getIO();

@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
 
 const ScheduleSchema = Yup.object().shape({
 	body: Yup.string()
-		.min(5, "Mensaje muy corto")
+		.min(5, "Mensagem muito curta")
 		.required("Obrigatório"),
 	contactId: Yup.number().required("Obrigatório"),
 	sendAt: Yup.string().required("Obrigatório")
@@ -226,7 +226,7 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 		}
 
 		if (selectedConnection === "") {
-			toast.error("Seleccione una Conexión!");
+			toast.error("Selecione uma conexão!");
 			return;
 		}
 
@@ -295,7 +295,7 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 				scroll="paper"
 			>
 				<DialogTitle id="form-dialog-title">
-					{schedule.status === 'ERRO' ? 'Error de Envío' : `Mensaje ${capitalize(schedule.status)}`}
+					{schedule.status === 'ERRO' ? 'Erro de Envio' : `Mensagem ${capitalize(schedule.status)}`}
 				</DialogTitle>
 				<Formik
 					initialValues={schedule}
@@ -349,8 +349,8 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 											name="geral"
 											error={touched.geral && Boolean(errors.geral)}
 										>
-											<MenuItem value={true}><ListItemText primary="Si" /></MenuItem>
-											<MenuItem value={false}><ListItemText primary="No" /></MenuItem>
+											<MenuItem value={true}><ListItemText primary="Sim" /></MenuItem>
+											<MenuItem value={false}><ListItemText primary="Não" /></MenuItem>
 										</Field>
 									</FormControl>
 									{values.geral === true &&(
@@ -366,8 +366,8 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 												id="atribuirUser"
 												name="atribuirUser"
 											>
-												<MenuItem value={true}><ListItemText primary="Si" /></MenuItem>
-												<MenuItem value={false}><ListItemText primary="No" /></MenuItem>
+												<MenuItem value={true}><ListItemText primary="Sim" /></MenuItem>
+												<MenuItem value={false}><ListItemText primary="Não" /></MenuItem>
 											</Field>
 										</FormControl>
 									)}
@@ -400,7 +400,7 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 										}}
 										renderValue={() => {
 											if (selectedConnection === "") {
-												return "Seleccione una conexión";
+												return "Selecione uma conexão";
 											}
 											const connection = connections.find((conn) => conn.id === selectedConnection);
 											return connection?.name || "";
@@ -437,7 +437,7 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 										}}
 										renderValue={() => {
 											if (selectedQueue === "") {
-												return "Seleccione una Fila";
+												return "Selecione uma fila"
 											}
 											const queue = user.queues.find(q => q.id === selectedQueue)
 											return queue.name
@@ -568,7 +568,7 @@ const ScheduleModal = ({ open, onClose, scheduleId, contactId, cleanContact, rel
 											color="default"
 											component="span"
 										>
-											Archivo Adjunto
+											Anexar Mídia
 										</Button>
 									</label>
 								</div>

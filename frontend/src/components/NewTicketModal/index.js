@@ -127,7 +127,7 @@ const NewTicketModal = ({ modalOpen, onClose, initialContact }) => {
   const handleSaveTicket = async contactId => {
     if (!contactId) return;
     if (selectedQueue === "") {
-      toast.error("Seleccione una fila");
+      toast.error("Selecione uma fila");
       return;
     }
     setLoading(true);
@@ -353,7 +353,7 @@ const NewTicketModal = ({ modalOpen, onClose, initialContact }) => {
                 }}
                 renderValue={() => {
                   if (selectedWhatsapp === "") {
-                    return "Seleccione una conexión"
+                    return "Selecione uma Conexão"
                   }
                   const whatsapp = whatsapps.find(w => w.id === selectedWhatsapp)
                   return whatsapp.name
@@ -440,7 +440,7 @@ const NewTicketModal = ({ modalOpen, onClose, initialContact }) => {
             color="secondary"
             variant="outlined"
           >
-            Cerrar
+            Fechar
           </Button>
           <Button
             onClick={navigateToExistingTicket}

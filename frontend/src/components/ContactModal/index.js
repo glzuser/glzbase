@@ -58,9 +58,9 @@ const phoneRegExp =
   
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Muito curto!")
-    .max(50, "Muito longo!")
-    .required("Obrigatório"),
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
   number: Yup.string()
     .min(12, "Número inválido")
     .max(16, "Número inválido")
@@ -188,7 +188,7 @@ const ContactModal = ({ open, onClose, contactId, initialValues, onSave }) => {
 										name="email"
 										error={touched.email && Boolean(errors.email)}
 										helperText={touched.email && errors.email}
-										placeholder="Endereço de email"
+										placeholder="Email address"
 										fullWidth
 										margin="dense"
 										variant="outlined"

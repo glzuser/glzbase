@@ -9,11 +9,7 @@ export const StartAllWhatsAppsSessions = async (
     const whatsapps = await ListWhatsAppsService({ companyId });
     if (whatsapps.length > 0) {
       whatsapps.forEach(whatsapp => {
-        if(whatsapp.type !== null) {
-       
-        } else {
-          StartWhatsAppSession(whatsapp, companyId);
-        }
+        StartWhatsAppSession(whatsapp, companyId);
       });
     }
   } catch (e) {

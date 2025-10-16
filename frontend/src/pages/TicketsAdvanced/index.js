@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
-        backgroundColor: theme.palette.boxticket, //DARK MODE Whaticket SaaS//
+        backgroundColor: theme.palette.boxticket, //DARK MODE//
     },
     placeholderItem: {
     }
@@ -71,7 +71,7 @@ const TicketAdvanced = (props) => {
         return <Box className={classes.placeholderContainer}>
             {/*<div className={classes.placeholderItem}>{i18n.t("chat.noTicketMessage")}</div>*/}
             <div>
-                <center><img style={{ margin: "0 auto", width: "30%" }} src={`${logoImg}?r=${Math.random()}`} alt={`${process.env.REACT_APP_NAME_SYSTEM}`} /></center>
+                <center><img style={{ margin: "0 auto", width: "80%" }} src={`${logoImg}?r=${Math.random()}`} alt={`${process.env.REACT_APP_NAME_SYSTEM}`} /></center>
             </div>
             <br />
             <Button onClick={() => setOption(1)} variant="contained" color="primary">

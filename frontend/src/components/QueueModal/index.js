@@ -101,16 +101,17 @@ const QueueModal = ({ open, onClose, queueId }) => {
   const [integrations, setIntegrations] = useState([]);
   const [queueEditable, setQueueEditable] = useState(true);
   const [confirmationOpen, setConfirmationOpen] = useState(false);
-
+  
   const [schedules, setSchedules] = useState([
-    { weekday: "Lunes", weekdayEn: "monday", startTime: "08:00", endTime: "18:00", },
-    { weekday: "Martes", weekdayEn: "tuesday", startTime: "08:00", endTime: "18:00", },
-    { weekday: "Miércoles", weekdayEn: "wednesday", startTime: "08:00", endTime: "18:00", },
-    { weekday: "Jueves", weekdayEn: "thursday", startTime: "08:00", endTime: "18:00", },
-    { weekday: "Viernes", weekdayEn: "friday", startTime: "08:00", endTime: "18:00", },
-    { weekday: "Sábado", weekdayEn: "saturday", startTime: "08:00", endTime: "12:00", },
-    { weekday: "Domingo", weekdayEn: "sunday", startTime: "00:00", endTime: "00:00", },
+    { weekday: i18n.t("queueModal.serviceHours.monday"), weekdayEn: "monday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.tuesday"), weekdayEn: "tuesday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.wednesday"), weekdayEn: "wednesday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.thursday"), weekdayEn: "thursday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.friday"), weekdayEn: "friday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.saturday"), weekdayEn: "saturday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
+    { weekday: i18n.t("queueModal.serviceHours.sunday"), weekdayEn: "sunday", startTimeA: "", endTimeA: "", startTimeB: "", endTimeB: "", },
   ]);
+  
   const [selectedPrompt, setSelectedPrompt] = useState(null);
   const [prompts, setPrompts] = useState([]);
 
@@ -223,7 +224,7 @@ const QueueModal = ({ open, onClose, queueId }) => {
           await api.post(`/queue/${queueId}/media-upload`, formData);
       }
 	  }
-      toast.success("Fila guardada con éxito");
+      toast.success("Queue saved successfully");
       handleClose();
     } catch (err) {
       toastError(err);
@@ -231,7 +232,7 @@ const QueueModal = ({ open, onClose, queueId }) => {
   };
 
   const handleSaveSchedules = async (values) => {
-    toast.success("Haz clic en guardar para registrar los cambios");
+    toast.success("Clique em salvar para registar as alterações");
     setSchedules(values);
     setTab(0);
   };
@@ -274,8 +275,8 @@ const QueueModal = ({ open, onClose, queueId }) => {
           onChange={(_, v) => setTab(v)}
           aria-label="disabled tabs example"
         >
-          <Tab label="Datos de fila" />
-          {schedulesEnabled && <Tab label="Horario de apertura" />}
+          <Tab label="Dados da Fila" />
+          {schedulesEnabled && <Tab label="Horários de Atendimento" />}
         </Tabs>
         {tab === 0 && (
           <Paper>

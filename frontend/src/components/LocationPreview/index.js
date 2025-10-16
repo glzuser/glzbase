@@ -38,7 +38,7 @@ const LocationPreview = ({ image, link, description }) => {
 							color="primary"
 							onClick={handleLocation}
 							disabled={!link}
-						>View</Button>
+						>Visualizar</Button>
 					</div>
 				</div>
 			</div>

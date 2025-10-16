@@ -33,8 +33,11 @@ const FindOrCreateTicketService = async (
     order: [["id", "DESC"]]
   });
 
-  if(ticket && openTicketSchedule){
-    await ticket.update({ status:"open", unreadMessages });
+  if (ticket) {
+    if (openTicketSchedule) {
+      await ticket.update({ status: "open", unreadMessages });
+    }
+    await ticket.update({ unreadMessages, whatsappId });
   }
 
   

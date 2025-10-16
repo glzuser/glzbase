@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
 
 const NoteSchema = Yup.object().shape({
 	note: Yup.string()
-		.min(2, "Muito curto!")
-        .max(254, "Muito longo!")
-		.required("Obrigatório")
+		.min(2, "Too Short!")
+        .max(254, "Too long!")
+		.required("Required")
 });
 
 export default function ContactNotesDialog ({ modalOpen, onClose, ticket }) {
@@ -82,7 +82,7 @@ export default function ContactNotesDialog ({ modalOpen, onClose, ticket }) {
             })
             await loadNotes()
             setNewNote({ note: '' })
-            toast.success('Observação adicionada com sucesso!');
+            toast.success('Observação adicionada com sucesso!')
         } catch (e) {
             toast.error(e)
         }
@@ -100,7 +100,7 @@ export default function ContactNotesDialog ({ modalOpen, onClose, ticket }) {
             await deleteNote(selectedNote.id)
             await loadNotes()
             setSelectedNote({})
-            toast.success('Observação excluída com sucesso!');
+            toast.success('Observação excluída com sucesso!')
         } catch (e) {
             toast.error(e)
         }
@@ -140,7 +140,7 @@ export default function ContactNotesDialog ({ modalOpen, onClose, ticket }) {
                 onClose={setShowOnDeleteDialog}
                 onConfirm={handleDelete}
             >
-                Tem certeza de que deseja excluir este registro?
+                Deseja realmente excluir este registro?
             </ConfirmationModal>
             <Dialog
                 maxWidth="md"

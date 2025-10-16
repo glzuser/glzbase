@@ -22,7 +22,7 @@ export default function DeleteButton({userProfile, ticket, setTickets}) {
 		try {
 			await api.delete(`/tickets/${ticket.id}`);
 			setTickets(prevTickets => prevTickets.filter(item => item.id !== ticket.id ))
-			toast.success("Ticket eliminado com sucesso");
+			toast.success("Ticket excluído com sucesso")
 		} catch (err) {
 			toastError(err);
 		}

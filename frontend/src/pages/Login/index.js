@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       right: 0,
       height: '50vh',
-      background: theme.palette.primary.dark,
+      background: theme.palette.primary.dark, // Usando primary.dark
       borderBottomLeftRadius: '50% 20%',
       borderBottomRightRadius: '50% 20%',
       zIndex: 0,
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
     margin: '0 auto -50px',
     borderRadius: '50%',
-    background: theme.palette.primary.dark,
+    background: theme.palette.primary.dark, // Usando primary.dark
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     '& img': {
       width: '70%',
       height: 'auto',
-/*       filter: 'brightness(0) invert(1)', */
+      filter: 'brightness(0) invert(1)',
     }
   },
   formTitle: {
@@ -154,149 +154,149 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const theme = useTheme();
-  const classes = useStyles();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [user, setUser] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
-  const { handleLogin, loading } = useContext(AuthContext);
-  const [viewregister, setviewregister] = useState('disabled');
+    const theme = useTheme();
+    const classes = useStyles();
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const [user, setUser] = useState({ email: "", password: "" });
+    const [showPassword, setShowPassword] = useState(false);
+    const { handleLogin, loading } = useContext(AuthContext);
+    const [viewregister, setviewregister] = useState('disabled');
 
-  const handleChangeInput = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+    const handleChangeInput = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
+    };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
-  useEffect(() => {
-    fetchviewregister();
-  }, []);
+    useEffect(() => {
+        fetchviewregister();
+    }, []);
 
-  const fetchviewregister = async () => {
-    try {
-      const responsev = await api.get("/settings/viewregister");
-      const viewregisterX = responsev?.data?.value;
-      setviewregister(viewregisterX);
-    } catch (error) {
-      console.error('Erro ao obter viewregister', error);
-    }
-  };
+    const fetchviewregister = async () => {
+        try {
+            const responsev = await api.get("/settings/viewregister");
+            const viewregisterX = responsev?.data?.value;
+            setviewregister(viewregisterX);
+        } catch (error) {
+            console.error('Error retrieving viewregister', error);
+        }
+    };
 
-  const handlSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(user);
-  };
+    const handlSubmit = (e) => {
+        e.preventDefault();
+        handleLogin(user);
+    };
 
-  const logo = `${process.env.REACT_APP_BACKEND_URL}/public/logotipos/login.png`;
-  const randomValue = Math.random();
-  const logoWithRandom = `${logo}?r=${randomValue}`;
+    const logo = `${process.env.REACT_APP_BACKEND_URL}/public/logotipos/login.png`;
+    const randomValue = Math.random();
+    const logoWithRandom = `${logo}?r=${randomValue}`;
 
-  return (
-    <div className={classes.root}>
-      {/* Círculos decorativos */}
-      <div className={classes.decorativeCircle} style={{ width: 300, height: 300, top: -150, left: -150 }} />
-      <div className={classes.decorativeCircle} style={{ width: 200, height: 200, bottom: -100, right: -100 }} />
-      
-      <div className={classes.loginContainer}>
-        <div className={classes.logoContainer}>
-          <img src={logoWithRandom} alt="Logo" />
+    return (
+        <div className={classes.root}>
+            {/* Decorative circles */}
+            <div className={classes.decorativeCircle} style={{ width: 300, height: 300, top: -150, left: -150 }} />
+            <div className={classes.decorativeCircle} style={{ width: 200, height: 200, bottom: -100, right: -100 }} />
+            
+            <div className={classes.loginContainer}>
+                <div className={classes.logoContainer}>
+                    <img src={logoWithRandom} alt="Logo" />
+                </div>
+                
+                <div className={classes.loginCard}>
+                    <Typography variant="h5" className={classes.formTitle}>
+                        Acesse sua conta
+                    </Typography>
+                    
+                    <form className={classes.form} onSubmit={handlSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label={i18n.t("login.form.email")}
+                            name="email"
+                            value={user.email}
+                            onChange={handleChangeInput}
+                            autoComplete="email"
+                            className={classes.inputField}
+                            placeholder="seu@email.com"
+                        />
+                        
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label={i18n.t("login.form.password")}
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            value={user.password}
+                            onChange={handleChangeInput}
+                            autoComplete="current-password"
+                            className={classes.inputField}
+                            placeholder="••••••••"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            edge="end"
+                                            color={theme.palette.type === 'dark' ? 'default' : 'primary'}
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submitButton}
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <CircularProgress size={24} color="inherit" />
+                            ) : (
+                                i18n.t("login.buttons.submit")
+                            )}
+                        </Button>
+                        
+                        <Grid container justifyContent="space-between">
+                            <Grid item>
+                                {viewregister === "enabled" && (
+                                    <Link
+                                        component={RouterLink}
+                                        to="/signup"
+                                        className={classes.linkText}
+                                    >
+                                        Criar conta
+                                    </Link>
+                                )}
+                            </Grid>
+                            <Grid item>
+                                <Link
+                                    component={RouterLink}
+                                    to="/forgetpsw"
+                                    className={classes.linkText}
+                                >
+                                    Esqueceu a senha?
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div className={classes.loginCard}>
-          <Typography variant="h5" className={classes.formTitle}>
-            Acesse sua conta
-          </Typography>
-
-          <form className={classes.form} onSubmit={handlSubmit}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label={i18n.t("login.form.email")}
-              name="email"
-              value={user.email}
-              onChange={handleChangeInput}
-              autoComplete="email"
-              className={classes.inputField}
-              placeholder="tu@email.com"
-            />
-
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label={i18n.t("login.form.password")}
-              type={showPassword ? "text" : "password"}
-              id="password"
-              value={user.password}
-              onChange={handleChangeInput}
-              autoComplete="current-password"
-              className={classes.inputField}
-              placeholder="••••••••"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      edge="end"
-                      color={theme.palette.type === 'dark' ? 'default' : 'primary'}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submitButton}
-              disabled={loading}
-            >
-              {loading ? (
-                <CircularProgress size={24} color="inherit" />
-              ) : (
-                i18n.t("login.buttons.submit")
-              )}
-            </Button>
-
-            <Grid container justifyContent="space-between">
-              <Grid item>
-                {viewregister === "enabled" && (
-                  <Link
-                    component={RouterLink}
-                    to="/signup"
-                    className={classes.linkText}
-                  >
-                    Criar conta
-                  </Link>
-                )}
-              </Grid>
-              <Grid item>
-                <Link
-                  component={RouterLink}
-                  to="/forgetpsw"
-                  className={classes.linkText}
-                >
-                  Esqueceu sua senha?
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Login;

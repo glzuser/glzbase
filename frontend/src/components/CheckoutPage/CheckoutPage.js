@@ -90,7 +90,7 @@ function _renderStepContent(step, setFieldValue, setActiveStep, values ) {
       setDatePayment(data)
       actions.setSubmitting(false);
       setActiveStep(activeStep + 1);
-toast.success("Assinatura realizada com sucesso! Aguardando confirmação do pagamento");
+      toast.success("Assinatura realizada com sucesso!, aguardando a realização do pagamento");
     } catch (err) {
       toastError(err);
     }
@@ -113,7 +113,7 @@ toast.success("Assinatura realizada com sucesso! Aguardando confirmação do pag
   return (
     <React.Fragment>
       <Typography component="h1" variant="h4" align="center">
-      Falta pouco!
+        Falta pouco!
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
         {steps.map((label) => (
@@ -141,7 +141,7 @@ toast.success("Assinatura realizada com sucesso! Aguardando confirmação do pag
                 <div className={classes.buttons}>
                   {activeStep !== 1 && (
                     <Button onClick={_handleBack} className={classes.button}>
-                      Voltar
+                      VOLTAR
                     </Button>
                   )}
                   <div className={classes.wrapper}>

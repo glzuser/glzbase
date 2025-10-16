@@ -295,7 +295,7 @@ const Quickemessages = () => {
               <TableCell align="center">{quickemessage.shortcode}</TableCell>
               
               <TableCell align="center">
-                {quickemessage.mediaName ?? i18n.t("quickMessages.noAttachment")}
+                {quickemessage.mediaName ?? "Sem anexo"}
               </TableCell>
               <TableCell align="center">
         {quickemessage.geral === true ? (

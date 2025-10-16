@@ -57,34 +57,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PromptSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(5, "¡Muy corto!")
-      .max(100, "¡Muy largo!")
-      .required("Obligatorio"),
-      
-    prompt: Yup.string()
-      .min(50, "¡Muy corto!")
-      .required("Describe el entrenamiento para la Inteligencia Artificial"),
-  
-    voice: Yup.string()
-      .required("Indica el modo de Voz"),
-  
-    max_tokens: Yup.number()
-      .required("Indica el número máximo de tokens"),
-  
-    temperature: Yup.number()
-      .required("Indica la temperatura"),
-  
-    apikey: Yup.string()
-      .required("Indica la clave API"),
-  
-    queueId: Yup.number()
-      .required("Indica la cola"),
-  
-    max_messages: Yup.number()
-      .required("Indica el número máximo de mensajes")
-  });
-  
+    name: Yup.string().min(5, "Muito curto!").max(100, "Muito longo!").required("Obrigatório"),
+    prompt: Yup.string().min(50, "Muito curto!").required("Descreva o treinamento para Inteligência Artificial"),
+    voice: Yup.string().required("Informe o modo para Voz"),
+    max_tokens: Yup.number().required("Informe o número máximo de tokens"),
+    temperature: Yup.number().required("Informe a temperatura"),
+    apikey: Yup.string().required("Informe a API Key"),
+    queueId: Yup.number().required("Informe a fila"),
+    max_messages: Yup.number().required("Informe o número máximo de mensagens")
+});
 
 const PromptModal = ({ open, onClose, promptId }) => {
     const classes = useStyles();

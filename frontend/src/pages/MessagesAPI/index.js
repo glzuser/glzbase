@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+
 import { i18n } from "../../translate/i18n";
 import { Button, CircularProgress, Grid, TextField, Typography } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import toastError from "../../errors/toastError";
 import { toast } from "react-toastify";
+// import api from "../../services/api";
 import axios from "axios";
 import usePlans from "../../hooks/usePlans";
 
@@ -34,8 +36,8 @@ const MessagesAPI = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const [formMessageTextData] = useState({ token: '', number: '', body: '' })
-  const [formMessageMediaData] = useState({ token: '', number: '', medias: '' })
+  const [formMessageTextData,] = useState({ token: '', number: '', body: '' })
+  const [formMessageMediaData,] = useState({ token: '', number: '', medias: '' })
   const [file, setFile] = useState({})
 
   const { getPlanCompany } = usePlans();
@@ -45,13 +47,14 @@ const MessagesAPI = () => {
       const companyId = localStorage.getItem("companyId");
       const planConfigs = await getPlanCompany(undefined, companyId);
       if (!planConfigs.plan.useExternalApi) {
-        toast.error("¡Esta empresa no tiene permiso para acceder a esta página! Redireccionando...");
+        toast.error("Esta empresa não possui permissão para acessar essa página! Estamos lhe redirecionando.");
         setTimeout(() => {
           history.push(`/`)
         }, 1000);
       }
     }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getEndpoint = () => {
@@ -71,7 +74,7 @@ const MessagesAPI = () => {
           'Authorization': `Bearer ${values.token}`
         }
       })
-      toast.success('Mensaje enviado exitosamente');
+      toast.success('Mensagem enviada com sucesso');
     } catch (err) {
       toastError(err);
     }
@@ -93,167 +96,190 @@ const MessagesAPI = () => {
           'Authorization': `Bearer ${values.token}`
         }
       })
-      toast.success('Mensaje enviado exitosamente');
+      toast.success('Mensagem enviada com sucesso');
     } catch (err) {
       toastError(err);
     }
   }
 
-  const renderFormMessageText = () => (
-    <Formik
-      initialValues={formMessageTextData}
-      enableReinitialize
-      onSubmit={(values, actions) => {
-        setTimeout(async () => {
-          await handleSendTextMessage(values);
-          actions.setSubmitting(false);
-          actions.resetForm()
-        }, 400);
-      }}
-      className={classes.elementMargin}
-    >
-      {({ isSubmitting }) => (
-        <Form className={classes.formContainer}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Field
-                as={TextField}
-                label={i18n.t("messagesAPI.textMessage.token")}
-                name="token"
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                required
-              />
+  const renderFormMessageText = () => {
+    return (
+      <Formik
+        initialValues={formMessageTextData}
+        enableReinitialize={true}
+        onSubmit={(values, actions) => {
+          setTimeout(async () => {
+            await handleSendTextMessage(values);
+            actions.setSubmitting(false);
+            actions.resetForm()
+          }, 400);
+        }}
+        className={classes.elementMargin}
+      >
+        {({ isSubmitting }) => (
+          <Form className={classes.formContainer}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Field
+                  as={TextField}
+                  label={i18n.t("messagesAPI.textMessage.token")}
+                  name="token"
+                  autoFocus
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  className={classes.textField}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Field
+                  as={TextField}
+                  label={i18n.t("messagesAPI.textMessage.number")}
+                  name="number"
+                  autoFocus
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  className={classes.textField}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  label={i18n.t("messagesAPI.textMessage.body")}
+                  name="body"
+                  autoFocus
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  className={classes.textField}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} className={classes.textRight}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  className={classes.btnWrapper}
+                >
+                  {isSubmitting ? (
+                    <CircularProgress
+                      size={24}
+                      className={classes.buttonProgress}
+                    />
+                  ) : 'Enviar'}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Field
-                as={TextField}
-                label={i18n.t("messagesAPI.textMessage.number")}
-                name="number"
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                as={TextField}
-                label={i18n.t("messagesAPI.textMessage.body")}
-                name="body"
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12} className={classes.textRight}>
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-              >
-                {isSubmitting ? (
-                  <CircularProgress size={24} />
-                ) : 'Enviar'}
-              </Button>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
-  )
+          </Form>
+        )}
+      </Formik>
+    )
+  }
 
-  const renderFormMessageMedia = () => (
-    <Formik
-      initialValues={formMessageMediaData}
-      enableReinitialize
-      onSubmit={(values, actions) => {
-        setTimeout(async () => {
-          await handleSendMediaMessage(values);
-          actions.setSubmitting(false);
-          actions.resetForm();
-          document.getElementById('medias').files = null;
-          document.getElementById('medias').value = null;
-        }, 400);
-      }}
-      className={classes.elementMargin}
-    >
-      {({ isSubmitting }) => (
-        <Form className={classes.formContainer}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Field
-                as={TextField}
-                label={i18n.t("messagesAPI.mediaMessage.token")}
-                name="token"
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                required
-              />
+  const renderFormMessageMedia = () => {
+    return (
+      <Formik
+        initialValues={formMessageMediaData}
+        enableReinitialize={true}
+        onSubmit={(values, actions) => {
+          setTimeout(async () => {
+            await handleSendMediaMessage(values);
+            actions.setSubmitting(false);
+            actions.resetForm()
+            document.getElementById('medias').files = null
+            document.getElementById('medias').value = null
+          }, 400);
+        }}
+        className={classes.elementMargin}
+      >
+        {({ isSubmitting }) => (
+          <Form className={classes.formContainer}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Field
+                  as={TextField}
+                  label={i18n.t("messagesAPI.mediaMessage.token")}
+                  name="token"
+                  autoFocus
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  className={classes.textField}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Field
+                  as={TextField}
+                  label={i18n.t("messagesAPI.mediaMessage.number")}
+                  name="number"
+                  autoFocus
+                  variant="outlined"
+                  margin="dense"
+                  fullWidth
+                  className={classes.textField}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <input type="file" name="medias" id="medias" required onChange={(e) => setFile(e.target.files)} />
+              </Grid>
+              <Grid item xs={12} className={classes.textRight}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  className={classes.btnWrapper}
+                >
+                  {isSubmitting ? (
+                    <CircularProgress
+                      size={24}
+                      className={classes.buttonProgress}
+                    />
+                  ) : 'Enviar'}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <Field
-                as={TextField}
-                label={i18n.t("messagesAPI.mediaMessage.number")}
-                name="number"
-                variant="outlined"
-                margin="dense"
-                fullWidth
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <input type="file" name="medias" id="medias" required onChange={(e) => setFile(e.target.files)} />
-            </Grid>
-            <Grid item xs={12} className={classes.textRight}>
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-              >
-                {isSubmitting ? (
-                  <CircularProgress size={24} />
-                ) : 'Enviar'}
-              </Button>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
-  )
+          </Form>
+        )}
+      </Formik>
+    )
+  }
 
   return (
     <Paper
       className={classes.mainPaper}
-      style={{ marginLeft: "5px" }}
+      style={{marginLeft: "5px"}}
+      // className={classes.elementMargin}
       variant="outlined"
     >
       <Typography variant="h5">
-        Documentación para envío de mensajes
+        Documentação para envio de mensagens
       </Typography>
       <Typography variant="h6" color="primary" className={classes.elementMargin}>
-        Métodos de Envío
+        Métodos de Envio
       </Typography>
       <Typography component="div">
         <ol>
-          <li>Mensajes de Texto</li>
-          <li>Mensajes de Media</li>
+          <li>Mensagens de Texto</li>
+          <li>Mensagens de Media</li>
         </ol>
       </Typography>
       <Typography variant="h6" color="primary" className={classes.elementMargin}>
-        Instrucciones
+        Instruções
       </Typography>
       <Typography className={classes.elementMargin} component="div">
-        <b>Observaciones importantes</b><br />
+        <b>Observações importantes</b><br />
         <ul>
-          <li>Antes de enviar mensajes, es necesario registrar el token vinculado a la conexión. <br />Para registrar, acceda al menú "Conexiones", edite la conexión e inserte el token en el campo correspondiente.</li>
+          <li>Antes de enviar mensagens, é necessário o cadastro do token vinculado à conexão que enviará as mensagens. <br />Para realizar o cadastro acesse o menu "Conexões", clique no botão editar da conexão e insira o token no devido campo.</li>
           <li>
-            El número de destino no debe contener máscara ni caracteres especiales y debe ser compuesto por:
+            O número para envio não deve ter mascara ou caracteres especiais e deve ser composto por:
             <ul>
-              <li>Código del país</li>
+              <li>Código do país</li>
               <li>DDD</li>
               <li>Número</li>
             </ul>
@@ -261,45 +287,49 @@ const MessagesAPI = () => {
         </ul>
       </Typography>
       <Typography variant="h6" color="primary" className={classes.elementMargin}>
-        1. Mensajes de Texto
+        1. Mensagens de Texto
       </Typography>
       <Grid container>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.elementMargin} component="div">
-            <p>Información necesaria para enviar mensajes de texto:</p>
+            <p>Seguem abaixo a lista de informações necessárias para envio das mensagens de texto:</p>
             <b>Endpoint: </b> {getEndpoint()} <br />
             <b>Método: </b> POST <br />
-            <b>Headers: </b> Authorization (Bearer token) y Content-Type (application/json) <br />
-            <b>Body: </b> {"{ \"number\": \"595985523065\", \"body\": \"Su mensaje\" }"}
+            <b>Headers: </b> Authorization (Bearer token) e Content-Type (application/json) <br />
+            <b>Body: </b> {"{ \"number\": \"595985523065\", \"body\": \"Sua mensagem\" }"}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.elementMargin}>
-            <b>Prueba de Envío</b>
+            <b>Teste de Envio</b>
           </Typography>
           {renderFormMessageText()}
         </Grid>
       </Grid>
       <Typography variant="h6" color="primary" className={classes.elementMargin}>
-        2. Mensajes de Media
+        2. Mensagens de Media
       </Typography>
       <Grid container>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.elementMargin} component="div">
-            <p>Información necesaria para enviar mensajes con media:</p>
+            <p>Seguem abaixo a lista de informações necessárias para envio das mensagens de texto:</p>
             <b>Endpoint: </b> {getEndpoint()} <br />
             <b>Método: </b> POST <br />
-            <b>Headers: </b> Authorization (Bearer token) y Content-Type (multipart/form-data) <br />
+            <b>Headers: </b> Authorization (Bearer token) e Content-Type (multipart/form-data) <br />
             <b>FormData: </b> <br />
             <ul>
-              <li><b>number: </b> 5599999999999</li>
-              <li><b>medias: </b> archivo</li>
+              <li>
+                <b>number: </b> 5599999999999
+              </li>
+              <li>
+                <b>medias: </b> arquivo
+              </li>
             </ul>
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography className={classes.elementMargin}>
-            <b>Prueba de Envío</b>
+            <b>Teste de Envio</b>
           </Typography>
           {renderFormMessageMedia()}
         </Grid>

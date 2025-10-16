@@ -38,6 +38,7 @@ const useAuth = () => {
       if (error?.response?.status === 403 && !originalRequest._retry) {
         originalRequest._retry = true;
 
+        console.log('process.env.REACT_APP_BACKEND_URL', process.env.REACT_APP_BACKEND_URL)
         const { data } = await api.post("/auth/refresh_token");
         if (data) {
           localStorage.setItem("token", JSON.stringify(data.token));
@@ -131,14 +132,14 @@ const useAuth = () => {
         setIsAuth(true);
         toast.success(i18n.t("auth.toasts.success"));
         if (Math.round(dias) < 5) {
-          toast.warn(`Tu suscripción vence en ${Math.round(dias)} ${Math.round(dias) === 1 ? 'día' : 'días'}`);
+          toast.warn(`Sua assinatura vence em ${Math.round(dias)} ${Math.round(dias) === 1 ? 'dia' : 'dias'} `);
         }
         history.push("/tickets");
         setLoading(false);
       } else {
-        toastError(`¡Ups! Tu suscripción ha vencido el ${vencimento}. 
-          ¡Ponte en contacto con Soporte para más información!`);
-          setLoading(false);          
+        toastError(`Opss! Sua assinatura venceu ${vencimento}.
+Entre em contato com o Suporte para mais informações! `);
+        setLoading(false);
       }
 
       //quebra linha 

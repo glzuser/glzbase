@@ -243,7 +243,7 @@ const TransferTicketModalCustom = ({ modalOpen, onClose, ticketid }) => {
                 }}
                 renderValue={() => {
                   if (selectedWhatsapp === "") {
-                    return "Seleccione una conexión"
+                    return "Selecione uma Conexão"
                   }
                   const whatsapp = whatsapps.find(w => w.id === selectedWhatsapp)
                   return whatsapp.name

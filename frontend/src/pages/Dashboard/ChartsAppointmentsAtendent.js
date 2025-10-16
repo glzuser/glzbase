@@ -268,7 +268,7 @@ const ChartsAppointmentsAtendent = () => {
       setTicketsData(data);
     } catch (err) {
       console.log(err);
-      toast.error('Error al obtener la información de los atendimientos');
+      toast.error("Erro ao obter informações dos atendimentos");
     }
   }
 
@@ -301,7 +301,7 @@ const ChartsAppointmentsAtendent = () => {
       : [],
     datasets: [
       {
-        label: "Número de Atenciones",
+        label: "Número de Atendimentos",
         data: ticketsData.ticketsByQueues
           ? ticketsData.ticketsByQueues.map((item) => item.total_tickets)
           : 0,
@@ -345,10 +345,10 @@ const ChartsAppointmentsAtendent = () => {
       <Paper className={classes.fixedHeightPaper2}>
         <Grid item xs={6} className={classes.fixedGridPaper3}>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Atenciones por Agentes
+            Atendimentos por Atendentes
           </Typography>
           <span style={{ fontSize: 13, color: "#bcbcbc" }}>
-            Descubre cuáles son los agentes más productivos
+            Saiba quais são os atendentes mais produtivos
           </span>
           <Stack
             direction={"row"}
@@ -371,7 +371,7 @@ const ChartsAppointmentsAtendent = () => {
                 )}
               />
             </LocalizationProvider>
-  
+
             <LocalizationProvider
               dateAdapter={AdapterDateFns}
               adapterLocale={brLocale}
@@ -381,13 +381,13 @@ const ChartsAppointmentsAtendent = () => {
                 onChange={(newValue) => {
                   setFinalDate(newValue);
                 }}
-                label="Fin"
+                label="Fim"
                 renderInput={(params) => (
                   <TextField fullWidth {...params} sx={{ width: "20ch" }} />
                 )}
               />
             </LocalizationProvider>
-  
+
             <Button
               className="buttonHover"
               onClick={handleChangeReportData}
@@ -402,14 +402,14 @@ const ChartsAppointmentsAtendent = () => {
             style={{ maxWidth: "100%", maxHeight: "250px" }}
           />
         </Grid>
-  
+
         <Grid item xs={6} className={classes.fixedGridPaper3}>
           <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            Atenciones por Departamentos/Filas
+            Atendimentos por Departamentos/Filas
           </Typography>
-  
+
           <span style={{ fontSize: 13, color: "#bcbcbc" }}>
-            Descubre cuáles son los departamentos más solicitados
+            Saiba quais são os departamentos mais procurados
           </span>
           <Stack
             direction={"row"}
@@ -427,7 +427,7 @@ const ChartsAppointmentsAtendent = () => {
         </Grid>
       </Paper>
     </Grid>
-  );  
+  );
 };
 
 export default ChartsAppointmentsAtendent;

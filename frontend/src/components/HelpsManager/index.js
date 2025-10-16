@@ -100,7 +100,7 @@ export function HelpManagerForm (props) {
                         <Grid xs={12} sm={6} md={3} item>
                             <Field
                                 as={TextField}
-                                label="Código de vídeo"
+                                label="Código do Vídeo"
                                 name="video"
                                 variant="outlined"
                                 className={classes.fullWidth}
@@ -202,7 +202,7 @@ export default function HelpsManager () {
             const helpList = await list()
             setRecords(helpList)
         } catch (e) {
-            toast.error('Não foi possível carregar a lista de registros');
+            toast.error('Não foi possível carregar a lista de registros')
         }
         setLoading(false)
     }
@@ -217,10 +217,10 @@ export default function HelpsManager () {
             }
             await loadHelps()
             handleCancel()
-            toast.success('Operação realizada com sucesso!');
+            toast.success('Operação realizada com sucesso!')
         } catch (e) {
-          toast.error('Não foi possível realizar a operação. Verifique se já existe uma ajuda com o mesmo nome ou se os campos foram preenchidos corretamente');
-        }   
+            toast.error('Não foi possível realizar a operação. Verifique se já existe uma helpo com o mesmo nome ou se os campos foram preenchidos corretamente')
+        }
         setLoading(false)
     }
 
@@ -230,10 +230,10 @@ export default function HelpsManager () {
             await remove(record.id)
             await loadHelps()
             handleCancel()
-            toast.success('Operação realizada com sucesso!');
+            toast.success('Operação realizada com sucesso!')
         } catch (e) {
-          toast.error('No fue posible realizar la operación');
-        }  
+            toast.error('Não foi possível realizar a operação')
+        }
         setLoading(false)
     }
 
@@ -278,12 +278,12 @@ export default function HelpsManager () {
                 </Grid>
             </Grid>
             <ConfirmationModal
-                title="Eliminação de Registro"
+                title="Exclusão de Registro"
                 open={showConfirmDialog}
                 onClose={() => setShowConfirmDialog(false)}
                 onConfirm={() => handleDelete()}
             >
-                Tem certeza de que deseja eliminar este registro?
+                Deseja realmente excluir esse registro?
             </ConfirmationModal>
         </Paper>
     )

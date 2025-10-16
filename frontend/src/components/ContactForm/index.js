@@ -52,11 +52,11 @@ const useStyles = makeStyles(theme => ({
 
 const ContactSchema = Yup.object().shape({
 	name: Yup.string()
-		.min(2, "Muito curto!")
-		.max(50, "Muito longo!")
-		.required("Obrigatório"),
-	number: Yup.string().min(8, "Muito curto!").max(50, "Muito longo!"),
-	email: Yup.string().email("Email inválido"),
+		.min(2, "Too Short!")
+		.max(50, "Too Long!")
+		.required("Required"),
+	number: Yup.string().min(8, "Too Short!").max(50, "Too Long!"),
+	email: Yup.string().email("Invalid email"),
 });
 
 export function ContactForm ({ initialContact, onSave, onCancel }) {
@@ -138,7 +138,7 @@ export function ContactForm ({ initialContact, onSave, onCancel }) {
                                 name="email"
                                 error={touched.email && Boolean(errors.email)}
                                 helperText={touched.email && errors.email}
-                                placeholder="Endereço de email"
+                                placeholder="Email address"
                                 fullWidth
                                 margin="dense"
                                 variant="outlined"

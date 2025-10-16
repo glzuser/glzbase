@@ -503,16 +503,14 @@ const messages = {
 			schedules: "Schedules",
 			campaigns: "Campaigns",
 			annoucements: "Announcements",
-			LogLauncher:"Updates",
+			loglauncher:"Updates",
 			chats: "Internal Chat",
 			financeiro: "Financial",
 			files: "File list",
 			prompts: "Open.Ai",
 			reports: "Reports",
 			queueIntegration: "Integrations",
-			tasks: "Tasks",
-			Logoutbar: "Logout",
-        },
+		  },
 		  appBar: {
 			notRegister:"No notifications",
 			user: {

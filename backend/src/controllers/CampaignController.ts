@@ -60,7 +60,7 @@ export const index = async (req: Request, res: Response): Promise<Response> => {
 export const store = async (req: Request, res: Response): Promise<Response> => {
   const { companyId } = req.user;
   const data = req.body as StoreData;
-  console.log('📊 DATOS------- ALMACÉN:', data);
+  console.log('data------- store:', data);
 
   const schema = Yup.object().shape({
     name: Yup.string().required()

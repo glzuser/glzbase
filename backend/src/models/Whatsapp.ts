@@ -147,9 +147,6 @@ class Whatsapp extends Model<Whatsapp> {
   
   @Column
   expiresInactiveMessage: string;
-
-  @Column
-   type: string;  
 }
 
 export default Whatsapp;

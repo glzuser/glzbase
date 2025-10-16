@@ -36,7 +36,7 @@ import { format } from "date-fns";
 import { getRandomRGBA } from "../../utils/colors";
 import { getFirstDayOfMonth, getLastDayOfMonth } from "../../utils/dates";
 
-// Registrar componentes de Chart.js
+// Registrar componentes do Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -126,6 +126,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: "palette",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -138,6 +140,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: "palette",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -150,6 +154,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -162,6 +167,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -174,6 +180,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -186,6 +193,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -198,6 +206,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -210,6 +219,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -222,6 +232,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
+    //backgroundColor: theme.palette.primary.main,
     backgroundColor:
       theme.palette.type === "dark"
         ? theme.palette.boxticket.main
@@ -241,7 +252,7 @@ const ChartsRushHour = () => {
 
   const companyId = localStorage.getItem("companyId");
 
-  const [finalDate, setFimalDate] = useState(getLastDayOfMonth(new Date()));
+  const [finalDate, setFinalDate] = useState(getLastDayOfMonth(new Date()));
   const [initialDate, setInitialDate] = useState(
     getFirstDayOfMonth(new Date())
   );
@@ -324,10 +335,10 @@ const ChartsRushHour = () => {
     <Grid item xs={12} style={{ marginTop: 8, marginBottom: 8 }}>
       <Paper className={classes.fixedHeightPaper2}>
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Hora do Pico - Troca de Mensagens
+          Horário de Pico - Troca de mensagens
         </Typography>
         <span style={{ fontSize: 13, color: "#bcbcbc" }}>
-          Quantidade de mensagens recebidas e enviadas em cada hora do dia.
+          Quantidade de mensagens recebidas e enviados em cada hora do dia.
         </span>
         <Stack
           direction={"row"}
@@ -344,7 +355,7 @@ const ChartsRushHour = () => {
               onChange={(newValue) => {
                 setInitialDate(newValue);
               }}
-              label="Início"
+              label="Inicio"
               renderInput={(params) => (
                 <TextField fullWidth {...params} sx={{ width: "20ch" }} />
               )}
@@ -358,7 +369,7 @@ const ChartsRushHour = () => {
             <DatePicker
               value={finalDate}
               onChange={(newValue) => {
-                setFimalDate(newValue);
+                setFinalDate(newValue);
               }}
               label="Fim"
               renderInput={(params) => (

@@ -411,7 +411,7 @@ export function QueueOptions({ queueId }) {
     <div className={classes.root}>
       <br />
       <Typography>
-        Opciones
+        Opções
         <Button
           color="primary"
           size="small"

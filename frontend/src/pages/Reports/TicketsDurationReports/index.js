@@ -119,7 +119,7 @@ const TicketsDurationReports = () => {
       setPdfLoading(false);
     } catch (error) {
       setPdfLoading(false);
-      toast.error('Error al generar el informe');
+      toast.error('Erro ao gerar o relatório');
       console.log(error);
     }
   }, [company,dateStartParam,dateEndParam,queryClient]);
@@ -193,12 +193,12 @@ const TicketsDurationReports = () => {
           >
             <TableHead>
               <TableRow>
-                <TableCell align="center">Contacto</TableCell>
-                <TableCell align="center">Abiertos</TableCell>
-                <TableCell align="center">Pendientes</TableCell>
-                <TableCell align="center">Finalizados</TableCell>
-                <TableCell align="center">Duración de los finalizados</TableCell>
-                <TableCell align="center">Acciones</TableCell>
+                <TableCell align="center"> Contato </TableCell>
+                <TableCell align="center"> Abertos </TableCell>
+                <TableCell align="center"> Pendentes </TableCell>
+                <TableCell align="center"> Finalizados </TableCell>
+                <TableCell align="center"> Duração dos finalizados</TableCell>
+                <TableCell align="center"> Ações </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

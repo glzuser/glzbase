@@ -122,7 +122,7 @@ export const ChatsUser = () => {
   return (
     <>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Total de Conversas por Usuarios
+        Total de Conversas por Usuários
       </Typography>
 
       <Stack direction={"row"} spacing={2} alignItems={"center"} sx={{ my: 2 }}>
@@ -135,7 +135,7 @@ export const ChatsUser = () => {
             onChange={(newValue) => {
               setInitialDate(newValue);
             }}
-            label="Início"
+            label="Inicio"
             renderInput={(params) => (
               <TextField fullWidth {...params} sx={{ width: "20ch" }} />
             )}
@@ -151,7 +151,7 @@ export const ChatsUser = () => {
             onChange={(newValue) => {
               setFinalDate(newValue);
             }}
-            label="Fin"
+            label="Fim"
             renderInput={(params) => (
               <TextField fullWidth {...params} sx={{ width: "20ch" }} />
             )}

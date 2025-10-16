@@ -10,5 +10,5 @@ const messageQueueSent = new Queue('messageQueueSent', connectionX, {
     maxRetriesPerRequest: null
   }
 });
-console.log("📬 COLA DE MENSAJES ENVIADOS:", messageQueueSent);
+console.log(messageQueueSent);
 export default messageQueueSent;

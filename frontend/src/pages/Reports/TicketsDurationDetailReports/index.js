@@ -116,7 +116,7 @@ const TicketsDurationDetailReports = () => {
       const date = `${newDate}${newDateTime}`;
       const formattedDate = date.replace(/[\W_]+/g, '');
       if (totalData > 1000) {
-        toast.info('Generando informe comprimido, por favor espere.');
+        toast.info('Gerando relatório compactado, por favor aguarde.');
         const filesArray = [];
         const pdfPages = Math.ceil(totalData / 500);
 
@@ -195,7 +195,7 @@ const TicketsDurationDetailReports = () => {
       setPdfLoading(false);
     } catch (error) {
       setPdfLoading(false);
-      toast.error('Error al generar el informe');
+      toast.error('Erro ao gerar o relatório');
       console.log(error);
     }
   }, [dateEndParam, dateStartParam, queryClient, totalData, company, contact]);

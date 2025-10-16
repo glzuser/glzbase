@@ -214,7 +214,7 @@ export default function Researchreports() {
       setPdfLoading(false);
     } catch (error) {
       setPdfLoading(false);
-      toast.error('Error al generar el informe');
+      toast.error('Erro ao gerar o relatório');
       console.log(error);
     }
   }, [dateFin, dateIni, queryClient, selectedUser]);

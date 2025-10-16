@@ -94,7 +94,7 @@ export const mediaUpload = async (
 
   const files = req.files as Express.Multer.File[];
   const file = head(files);
-  console.log("📂 ARCHIVO:", file);
+  console.log(file);
   return res.send({ mensagem: "Arquivo Anexado" });
 };
 
@@ -123,7 +123,7 @@ export const certUpload = async (
 
   const files = req.files as Express.Multer.File[];
   const file = head(files);
-  console.log("📂 ARCHIVO:", file);
+  console.log(file);
   return res.send({ mensagem: "Arquivo Anexado" });
 };
 
@@ -153,6 +153,6 @@ export const docUpload = async (
 
   const files = req.files as Express.Multer.File[];
   const file = head(files);
-  console.log("📂 ARCHIVO:", file);
+  console.log(file);
   return res.send({ mensagem: "Arquivo Anexado" });
 };

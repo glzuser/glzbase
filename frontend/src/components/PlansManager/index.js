@@ -307,8 +307,8 @@ export function PlanManagerForm(props) {
                                     name="useInternal"
                                     margin="dense"
                                 >
-                                    <MenuItem value={false}>Si</MenuItem>
-                                    <MenuItem value={true}>No</MenuItem>
+                                    <MenuItem value={false}>Sim</MenuItem>
+                                    <MenuItem value={true}>Não</MenuItem>
                                 </Field>
                             </FormControl>
                         </Grid>
@@ -399,7 +399,7 @@ export function PlansManagerGrid(props) {
                         <TableCell align="center">Kanban</TableCell>
                         <TableCell align="center">Open.Ai</TableCell>
                         <TableCell align="center">Integrações</TableCell>
-						<TableCell align="center">Plan Interno</TableCell>
+						<TableCell align="center">Plano Interno</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -468,7 +468,7 @@ export default function PlansManager() {
             const planList = await list()
             setRecords(planList)
         } catch (e) {
-            toast.error('Não foi possível carregar a lista de registros');
+            toast.error('Não foi possível carregar a lista de registros')
         }
         setLoading(false)
     }
@@ -486,8 +486,8 @@ export default function PlansManager() {
             handleCancel()
             toast.success('Operação realizada com sucesso!')
         } catch (e) {
-            toast.error('Não foi possível realizar a operação. Verifique se já existe um plano com o mesmo nome ou se os campos foram preenchidos corretamente')
-        }        
+            toast.error('Não foi possível realizar a operação. Verifique se já existe uma plano com o mesmo nome ou se os campos foram preenchidos corretamente')
+        }
         setLoading(false)
     }
 
@@ -499,8 +499,8 @@ export default function PlansManager() {
             handleCancel()
             toast.success('Operação realizada com sucesso!')
         } catch (e) {
-            toast.error('No fue posible realizar la operación')
-        }        
+            toast.error('Não foi possível realizar a operação')
+        }
         setLoading(false)
     }
 

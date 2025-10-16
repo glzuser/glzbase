@@ -1,7 +1,7 @@
 import axios from "axios";
 import Ticket from "../../models/Ticket";
 import QueueIntegrations from "../../models/QueueIntegrations";
-import { WASocket, delay, proto } from "@whiskeysockets/baileys";
+import { WASocket, delay, proto } from "baileys";
 import { getBodyMessage } from "../WbotServices/wbotMessageListener";
 import { logger } from "../../utils/logger";
 import { isNil } from "lodash";
@@ -74,7 +74,7 @@ const typebotListener = async ({
             return request.data;
 
         } catch (err) {
-            logger.info("❌ ERRO AO CRIAR SESSÃO DO TYPEBOT: ", err);
+            logger.info("Erro ao criar sessão do typebot: ", err)
             throw err;
         }
     }

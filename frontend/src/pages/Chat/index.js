@@ -138,10 +138,10 @@ export function ChatModal({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cerrar
+          Fechar
         </Button>
         <Button onClick={handleSave} color="primary" variant="contained">
-          Guardar
+          Salvar
         </Button>
       </DialogActions>
     </Dialog>
@@ -344,7 +344,7 @@ function Chat(props) {
                 color="primary"
                 variant="contained"
               >
-                Nuevo
+                Nova
               </Button>
             </div>
           
@@ -400,7 +400,7 @@ function Chat(props) {
                 color="primary"
                 variant="contained"
               >
-                Nuevo
+                Novo
               </Button>
             </div>
             <ChatList

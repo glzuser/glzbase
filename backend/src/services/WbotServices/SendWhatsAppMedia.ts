@@ -1,4 +1,4 @@
-import { WAMessage, AnyMessageContent } from "@whiskeysockets/baileys";
+import { WAMessage, AnyMessageContent } from "baileys";
 import * as Sentry from "@sentry/node";
 import fs from "fs";
 import { exec } from "child_process";
@@ -11,6 +11,7 @@ import mime from "mime-types";
 
 import ffmpegPath from "ffmpeg-static";
 import formatBody from "../../helpers/Mustache";
+import { buildContactAddress } from "../../utils/global";
 
 interface Request {
   media: Express.Multer.File;
@@ -19,6 +20,7 @@ interface Request {
   body?: string;
   isForwarded?: boolean;  
 }
+
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
@@ -156,7 +158,7 @@ const SendWhatsAppMedia = async ({
     if (shouldBeDocument) {
       options = {
         document: fs.readFileSync(pathMedia),
-        caption: bodyMessage,
+        caption: bodyMessage || null,
         fileName: fileName,
         mimetype: mimeType
       };
@@ -165,7 +167,7 @@ const SendWhatsAppMedia = async ({
     else if (typeMessage === "video" || videoMimeTypes.includes(mimeType)) {
       options = {
         video: fs.readFileSync(pathMedia),
-        caption: bodyMessage,
+        caption: bodyMessage || null,
         fileName: fileName,
         mimetype: mimeType
       };
@@ -189,33 +191,33 @@ const SendWhatsAppMedia = async ({
     } else if (typeMessage === "document" || mimeType === "application/pdf") {
       options = {
         document: fs.readFileSync(pathMedia),
-        caption: bodyMessage,
+        caption: bodyMessage || null,
         fileName: fileName,
         mimetype: mimeType
       };
     } else if (typeMessage === "image") {
       options = {
         image: fs.readFileSync(pathMedia),
-        caption: bodyMessage
+        caption: bodyMessage || null
       };
     } else {
       // Caso o tipo de mídia não seja reconhecido, trata como documento
       options = {
         document: fs.readFileSync(pathMedia),
-        caption: bodyMessage,
+        caption: bodyMessage || null,
         fileName: fileName,
         mimetype: mimeType
       };
     }
 
     const sentMessage = await wbot.sendMessage(
-      `${ticket.contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"}`,
+      buildContactAddress(ticket.contact, ticket.isGroup),
       {
         ...options
       }
     );
 
-    await ticket.update({ lastMessage: bodyMessage });
+    await ticket.update({ lastMessage: bodyMessage || "📎 Mídia" });
 
     return sentMessage;
   } catch (err) {

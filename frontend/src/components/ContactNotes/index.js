@@ -80,7 +80,7 @@ export function ContactNotes ({ ticket }) {
             })
             await loadNotes()
             setNewNote({ note: '' })
-            toast.success('¡Observación añadida con éxito!');
+            toast.success('Observação adicionada com sucesso!')
         } catch (e) {
             toast.error(e)
         }
@@ -98,7 +98,7 @@ export function ContactNotes ({ ticket }) {
             await deleteNote(selectedNote.id)
             await loadNotes()
             setSelectedNote({})
-            toast.success('¡Observación eliminada con éxito!');
+            toast.success('Observação excluída com sucesso!')
         } catch (e) {
             toast.error(e)
         }
@@ -134,7 +134,7 @@ export function ContactNotes ({ ticket }) {
                 onClose={setShowOnDeleteDialog}
                 onConfirm={handleDelete}
             >
-                 ¿Está seguro que desea eliminar este registro?
+                Deseja realmente excluir este registro?
             </ConfirmationModal>
             <Formik
                 initialValues={newNote}
@@ -190,7 +190,7 @@ export function ContactNotes ({ ticket }) {
                                     </Grid>
                                     <Grid xs={6} item>
                                         <ButtonWithSpinner loading={loading} color="primary" type="submit" variant="contained" autoFocus fullWidth>
-                                         Guardar
+                                            Salvar
                                         </ButtonWithSpinner>
                                     </Grid>
                                 </Grid>

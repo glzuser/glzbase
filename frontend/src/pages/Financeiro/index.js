@@ -167,7 +167,7 @@ const Invoices = () => {
     if (dias < 0) {
       return "Vencido";
     } else {
-      return "Aberto"
+      return "Em Aberto"
     }
 
   }
@@ -198,7 +198,7 @@ const Invoices = () => {
               <TableCell align="center">Valor</TableCell>
               <TableCell align="center">Data Venc.</TableCell>
               <TableCell align="center">Status</TableCell>
-              <TableCell align="center">Opções</TableCell>
+              <TableCell align="center">Ação</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

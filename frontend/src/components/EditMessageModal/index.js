@@ -20,7 +20,7 @@ import whatsBackgroundDark from "../../assets/wa-background-dark.png"
 const useStyles = makeStyles((theme) => ({
   messagesList: {
     backgroundSize: "370px",
-    backgroundImage: theme.mode === 'light' ? `url(${whatsBackground})` : `url(${whatsBackgroundDark})`, //DARK MODE Whaticket SaaS//
+    backgroundImage: theme.mode === 'light' ? `url(${whatsBackground})` : `url(${whatsBackgroundDark})`, //DARK MODE//
     display: "flex",
     display: "flex",
     justifyContent: "center",
@@ -182,7 +182,7 @@ const EditMessageModal = ({ open, onClose, onSave, message }) => {
        <IconButton edge="start" color="inherit" onClick={() => onClose(false)} aria-label="close">
           <CloseIcon />
         </IconButton>
-         Editar Mensagem
+        Editar Mensagem
         </DialogTitle>
       <DialogContent style={{ padding: "0px"}}>
         <Box>
@@ -223,7 +223,7 @@ const EditMessageModal = ({ open, onClose, onSave, message }) => {
                 style={{ padding: "15px 0px 15px 15px", flex: 1 }}
                 multiline
                 maxRows={6}
-                placeholder="Buscar no Google Maps"
+                placeholder="Search Google Maps"
                 value={editedMessage}
                 onChange={(e) => setEditedMessage(e.target.value)}
                 inputProps={{ "aria-label": "search google maps" }}

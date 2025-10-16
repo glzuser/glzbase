@@ -261,7 +261,7 @@ const ContactListItems = () => {
             ? `${i18n.t("contactListItems.confirmationModal.deleteTitle")} ${
                 deletingContact.name
               }?`
-            : `${i18n.t("contactListItems.confirmationModal.importTitle")}`
+            : `${i18n.t("contactListItems.confirmationModal.importTitlte")}`
         }
         open={confirmOpen}
         onClose={setConfirmOpen}

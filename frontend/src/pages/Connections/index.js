@@ -536,6 +536,13 @@ const Connections = () => {
                 >
                   {i18n.t("connections.buttons.restart")}
                 </Button>
+                <IconButton
+                  className={classes.toggleThemeButton}
+                  onClick={() => theme.toggleTheme && theme.toggleTheme()}
+                  aria-label="toggle theme"
+                >
+                  {theme.palette.type === 'dark' ? <Brightness7 /> : <Brightness4 />}
+                </IconButton>
               </div>
             )}
           />
@@ -551,7 +558,7 @@ const Connections = () => {
           <>
             <Box mb={3}>
               <Typography variant="h6" color="textPrimary">
-                {i18n.t("connections.subtitle")} {whatsApps?.length || 0} conexiones
+                {i18n.t("connections.subtitle")} · {whatsApps?.length || 0} conexões
               </Typography>
               <Divider />
             </Box>
@@ -593,13 +600,13 @@ const Connections = () => {
                         <Box className={classes.infoItem}>
                           <Phone fontSize="small" />
                           <Typography variant="body2" noWrap>
-                          {whatsApp.number ? (
-                            <Tooltip title={whatsApp.number} arrow>
-                              <span>{formatSerializedId(whatsApp.number)}</span>
-                            </Tooltip>
-                          ) : (
-                            "Número no definido"
-                          )}
+                            {whatsApp.number ? (
+                              <Tooltip title={whatsApp.number} arrow>
+                                <span>{formatSerializedId(whatsApp.number)}</span>
+                              </Tooltip>
+                            ) : (
+                              "Número não definido"
+                            )}
                           </Typography>
                         </Box>
                         
@@ -634,7 +641,7 @@ const Connections = () => {
                                   onClick={() => handleOpenConfirmationModal("delete", whatsApp.id)}
                                   color="secondary"
                                 >
-                                  Borrar
+                                  Excluir
                                 </Button>
                               </Box>
                             )}
@@ -649,10 +656,10 @@ const Connections = () => {
               <Box className={classes.emptyState}>
                 <AccountCircle style={{ fontSize: 60, color: theme.palette.text.disabled }} />
                 <Typography variant="h6" gutterBottom>
-                  No se encontró ninguna conexión
+                  Nenhuma conexão encontrada
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Haz clic en el botón "Agregar Conexión" para comenzar
+                  Clique no botão "Adicionar Conexão" para começar
                 </Typography>
               </Box>
             )}

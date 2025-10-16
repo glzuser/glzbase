@@ -27,14 +27,6 @@ module.exports = {
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false
-      },
-      messengerId: {
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      instagramId: {
-        type: DataTypes.STRING,
-        allowNull: true
       }
     });
   },

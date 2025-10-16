@@ -76,7 +76,7 @@ const Chat = () => {
 							<Paper square variant="outlined" className={classes.welcomeMsg}>
 							
 							<div>
-							 <center><img style={{ margin: "0 auto", width: "70%" }} src={`${logoImg}?r=${Math.random()}`} alt={`${process.env.REACT_APP_NAME_SYSTEM}`} /></center>
+							 <center><img style={{ margin: "0 auto", width: "80%" }} src={`${logoImg}?r=${Math.random()}`} alt={`${process.env.REACT_APP_NAME_SYSTEM}`} /></center>
 							</div>
 							
 							{/*<span>{i18n.t("chat.noTicketMessage")}</span>*/}

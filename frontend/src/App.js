@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import lightBackground from '../src/assets/wa-background-light.png';
 import darkBackground from '../src/assets/wa-background-dark.jpg';
-import { esES } from "@material-ui/core/locale";
 import { ptBR } from "@material-ui/core/locale";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
@@ -41,7 +40,7 @@ const App = () => {
                 },
                 "&::-webkit-scrollbar-thumb": {
                     boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.3)',
-                    backgroundColor: "#00BF63",
+                    backgroundColor: "#2DDD7F",
 					borderRadius: "8px",
                 },
             },
@@ -57,11 +56,12 @@ const App = () => {
             },
             palette: {
                 type: mode,
-                primary: { main: mode === "light" ? "#00BF63" : "#FFFFFF" },
-				sair: { main: mode === "light" ? "#00BF63" : "#333" },
-				vcard: { main: mode === "light" ? "#00BF63" : "#666" },
-                textPrimary: mode === "light" ? "#00BF63" : "#FFFFFF",
-                borderPrimary: mode === "light" ? "#00BF63" : "#FFFFFF",
+                primary: { main: mode === "light" ? "#2DDD7F" : "#FFFFFF" },
+                quicktags: { main: mode === "light" ? "#2DDD7F" : "#2DDD7F" },
+				sair: { main: mode === "light" ? "#2DDD7F" : "#333" },
+				vcard: { main: mode === "light" ? "#2DDD7F" : "#666" },
+                textPrimary: mode === "light" ? "#2DDD7F" : "#FFFFFF",
+                borderPrimary: mode === "light" ? "#2DDD7F" : "#FFFFFF",
                 dark: { main: mode === "light" ? "#333333" : "#F3F3F3" },
                 light: { main: mode === "light" ? "#F3F3F3" : "#333333" },
                 tabHeaderBackground: mode === "light" ? "#EEE" : "#666",
@@ -83,7 +83,7 @@ const App = () => {
                 total: mode === "light" ? "#fff" : "#222",
                 messageIcons: mode === "light" ? "grey" : "#F3F3F3",
                 inputBackground: mode === "light" ? "#FFFFFF" : "#333",
-                barraSuperior: mode === "light" ? "linear-gradient(to right, #00BF63, #0EDA78)" : "#666",
+                barraSuperior: mode === "light" ? "linear-gradient(to right, #2DDD7F, #2DDD7F , #2DDD7F)" : "#666",
 				boxticket: mode === "light" ? "#EEE" : "#666",
 				campaigntab: mode === "light" ? "#ededed" : "#666",
 				mediainput: mode === "light" ? "#ededed" : "#1c1c1c",
@@ -99,7 +99,7 @@ const App = () => {
         const browserLocale =
             i18nlocale.substring(0, 2) + i18nlocale.substring(3, 5);
 
-       if (browserLocale === "ptBR") {
+        if (browserLocale === "ptBR") {
             setLocale(ptBR);
         }
     }, []);

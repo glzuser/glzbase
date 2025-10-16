@@ -263,7 +263,7 @@ export function CompanyForm(props) {
                     margin="dense"
                   >
                     <MenuItem value={true}>Sim</MenuItem>
-                    <MenuItem value={false}>No</MenuItem>
+                    <MenuItem value={false}>Não</MenuItem>
                   </Field>
                 </FormControl>
               </Grid>
@@ -287,7 +287,7 @@ export function CompanyForm(props) {
                 <FormControl variant="outlined" fullWidth>
                   <Field
                     as={TextField}
-                    label="Data de Venc."
+                    label="Data de Vencimento"
                     type="date"
                     name="dueDate"
                     InputLabelProps={{
@@ -302,7 +302,7 @@ export function CompanyForm(props) {
               <Grid xs={12} sm={6} md={2} item>
                 <FormControl margin="dense" variant="outlined" fullWidth>
                   <InputLabel htmlFor="recorrencia-selection">
-                   Recorrência
+                    Recorrência
                   </InputLabel>
                   <Field
                     as={Select}
@@ -313,10 +313,10 @@ export function CompanyForm(props) {
                     margin="dense"
                   >
                     <MenuItem value="MENSAL">Mensal</MenuItem>
-                    {<MenuItem value="BIMESTRAL">Bimestral</MenuItem>}
-                    {<MenuItem value="TRIMESTRAL">Trimestral</MenuItem>}
-                    {<MenuItem value="SEMESTRAL">Semestral</MenuItem>}
-                    {<MenuItem value="ANUAL">Anual</MenuItem>}
+                    {/*<MenuItem value="BIMESTRAL">Bimestral</MenuItem>*/}
+                    {/*<MenuItem value="TRIMESTRAL">Trimestral</MenuItem>*/}
+                    {/*<MenuItem value="SEMESTRAL">Semestral</MenuItem>*/}
+                    {/*<MenuItem value="ANUAL">Anual</MenuItem>*/}
                   </Field>
                 </FormControl>
               </Grid>
@@ -401,10 +401,10 @@ export function CompaniesManagerGrid(props) {
   const { dateToClient } = useDate();
 
   const renderStatus = (row) => {
-    return row.status === false ? "Pausada" : "Ativa";
+    return row.status === false ? "Não" : "Sim";
   };
 
-  const renderPlano = (row) => {
+  const renderPlan = (row) => {
     return row.planId !== null ? row.plan.name : "-";
   };
 
@@ -452,14 +452,14 @@ export function CompaniesManagerGrid(props) {
             <TableCell align="center" style={{ width: "1%" }}>
               #
             </TableCell>
-			      <TableCell align="left">ID</TableCell>
+			<TableCell align="left">ID</TableCell>
             <TableCell align="left">Nome</TableCell>
             <TableCell align="left">E-mail</TableCell>
             <TableCell align="left">Telefone</TableCell>
             <TableCell align="left">Plano</TableCell>
-           {/*  <TableCell align="left">Campañas</TableCell> */}
+            {/*<TableCell align="left">Campanhas</TableCell>*/}
             <TableCell align="left">Status</TableCell>
-            <TableCell align="left">Criada</TableCell>
+            <TableCell align="left">Criada Em</TableCell>
             <TableCell align="left">Vencimento</TableCell>
           </TableRow>
         </TableHead>
@@ -475,7 +475,7 @@ export function CompaniesManagerGrid(props) {
               <TableCell align="left">{row.name || "-"}</TableCell>
               <TableCell align="left">{row.email || "-"}</TableCell>
               <TableCell align="left">{row.phone || "-"}</TableCell>
-              <TableCell align="left">{renderPlano(row)}</TableCell>
+              <TableCell align="left">{renderPlan(row)}</TableCell>
 			{/*<TableCell align="left">{renderCampaignsStatus(row)}</TableCell>*/}
               <TableCell align="left">{renderStatus(row)}</TableCell>
               <TableCell align="left">{dateToClient(row.createdAt)}</TableCell>
@@ -500,7 +500,7 @@ export default function CompaniesManager() {
   const [loading, setLoading] = useState(false);
   const [records, setRecords] = useState([]);
   const [record, setRecord] = useState({
-	  id: "",  
+	id: "",  
     name: "",
     email: "",
     phone: "",
@@ -522,7 +522,7 @@ export default function CompaniesManager() {
       const companyList = await list();
       setRecords(companyList);
     } catch (e) {
-      toast.error("NÃO FOI POSSÍVEL CARREGAR A LISTA DE REGISTROS");
+      toast.error("Não foi possível carregar a lista de registros");
     }
     setLoading(false);
   };
@@ -542,7 +542,7 @@ export default function CompaniesManager() {
       toast.error(
         "Não foi possível realizar a operação. Verifique se já existe uma empresa com o mesmo nome ou se os campos foram preenchidos corretamente"
       );
-    }   
+    }
     setLoading(false);
   };
 
@@ -555,7 +555,7 @@ export default function CompaniesManager() {
       toast.success("Operação realizada com sucesso!");
     } catch (e) {
       toast.error("Não foi possível realizar a operação");
-    }  
+    }
     setLoading(false);
   };
 
@@ -566,7 +566,7 @@ export default function CompaniesManager() {
   const handleCancel = () => {
     setRecord((prev) => ({
       ...prev,
-	    id: "",
+	  id: "",
       name: "",
       email: "",
       phone: "",
@@ -625,7 +625,7 @@ export default function CompaniesManager() {
         onClose={() => setShowConfirmDialog(false)}
         onConfirm={() => handleDelete()}
       >
-       Tem certeza de que deseja excluir este registro?
+        Deseja realmente excluir esse registro?
       </ConfirmationModal>
     </Paper>
   );
