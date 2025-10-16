@@ -101,7 +101,7 @@ const Kanban = () => {
       setTags(fetchedTags);
     } catch (error) {
       console.log(error);
-      toast.error("Error al cargar las etiquetas");
+      toast.error("Erro ao carregar as etiquetas");
     }
   };
 
@@ -116,7 +116,7 @@ const Kanban = () => {
       setTickets(data.tickets);
     } catch (err) {
       console.log(err);
-      toast.error("Error al cargar los tickets");
+      toast.error("Erro ao carregar os tickets");
       setTickets([]);
     }
   };
@@ -145,14 +145,14 @@ const Kanban = () => {
     try {
       if (actionType === 'archive') {
         await api.delete(`/ticket-tags/${selectedTicket.id}`);
-        toast.success('Ticket archivado con éxito');
+        toast.success('Ticket arquivado com sucesso');
       }
       
       fetchTickets();
       fetchTags();
     } catch (err) {
       console.log(err);
-      toast.error('Error al procesar la acción');
+      toast.error('Erro ao processar a ação');
     } finally {
       handleDialogClose();
     }
@@ -180,7 +180,7 @@ const Kanban = () => {
     const lanes = [
       {
         id: "0",
-        title: <LaneTitle firstLane quantity={laneQuantities["0"]}>Abiertos</LaneTitle>,
+        title: <LaneTitle firstLane quantity={laneQuantities["0"]}>Abertos</LaneTitle>,
         style: { 
           backgroundColor: "#f0f2f5",
           borderTop: "4px solid #6c757d" 
@@ -190,7 +190,7 @@ const Kanban = () => {
           title: <CardTitle ticket={ticket} userProfile={user.profile} />,
           label: (
             <div className={classes.cardActions}>
-              <Tooltip title="Opciones">
+              <Tooltip title="Opções">
                 <IconButton
                   size="small"
                   onClick={(e) => handleMenuClick(e, ticket)}
@@ -217,7 +217,7 @@ const Kanban = () => {
           title: <CardTitle ticket={ticket} userProfile={user.profile} />,
           label: (
             <div className={classes.cardActions}>
-              <Tooltip title="Opciones">
+              <Tooltip title="Opções">
                 <IconButton
                   size="small"
                   onClick={(e) => handleMenuClick(e, ticket)}
@@ -244,7 +244,7 @@ const Kanban = () => {
         if (targetLaneId !== "0") {
           await api.put(`/ticket-tags/${cardId}/${targetLaneId}`);
         }
-        toast.success('Ticket movido con éxito');
+        toast.success('Ticket movido com sucesso');
       }
 
       setFile(prevFile => {
@@ -275,7 +275,7 @@ const Kanban = () => {
 
     } catch (err) {
       console.log(err);
-      toast.error('Error al mover el ticket');
+      toast.error('Erro ao mover o ticket');
     }
   };
 
@@ -324,13 +324,13 @@ const Kanban = () => {
       {/* Diálogo de confirmación */}
       <Dialog open={openDialog} onClose={handleDialogClose}>
         <DialogTitle>
-          {actionType === 'archive' ? 'Desvincular Ticket' : 'Borrar Ticket'}
+          {actionType === 'archive' ? 'Desvincular Ticket' : 'Excluir Ticket'}
         </DialogTitle>
         <DialogContent>
           {actionType === 'archive' ? (
-            <p>¿Estás seguro de que deseas desvincular este ticket de todas las etiquetas kanban? El chat permanecerá intacto.</p>
+            <p>Tem certeza que deseja desvincular este ticket de todas as etiquetas kanban? O chat permanecerá intacto.</p>
           ) : (
-            <p>Atención: Esta acción es irreversible. Todos los mensajes se perderán.</p>
+            <p>Atenção: Esta ação é irreversível. Todas as mensagens serão perdidas.</p>
           )}
         </DialogContent>
         <DialogActions>
