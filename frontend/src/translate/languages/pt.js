@@ -62,6 +62,10 @@ const messages = {
         token: "Token",
       },
       dashboard: {
+        agent: "Agente",
+        evaluations: "Avaliações",
+        tmConversations: "TM. Conversa",
+        status: "Online",
         charts: {
           perDay: {
             title: "Tickets hoje: ",
@@ -1093,6 +1097,40 @@ const messages = {
         ERR_WAPP_GREETING_REQUIRED:
           "A mensagem de boas-vindas é obrigatória quando há mais de uma fila.",
         ERR_CHECK_NUMBER: "Número inválido. Verifique o número e tente novamente.",
+      },
+      queueSelect: {
+        inputLabel: "Filas",
+      },
+      settings: {
+        title: "Configurações",
+      },
+      messagesInput: {
+        signMessage: "Assinar",
+        placeholderOpen: "Digite uma mensagem",
+      },
+      messagesList: {
+        header: {
+          assignedTo: "Atribuído a:",
+          buttons: {
+            return: "Voltar",
+            resolve: "Resolver",
+          },
+        },
+      },
+      contactDrawer: {
+        header: "Detalhes do contato",
+        extraInfo: "Informações adicionais",
+        buttons: {
+          edit: "Editar contato",
+          delete: "Excluir",
+          addTag: "Adicionar etiqueta",
+          removeTag: "Remover etiqueta",
+          addContact: "Adicionar contato",
+          removeContact: "Remover contato",
+        },
+      },
+      qrCodeModal: {
+        title: "CHASAP - QR Code",
       },
     },
   },

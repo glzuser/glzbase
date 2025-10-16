@@ -180,7 +180,7 @@ const Login = () => {
       const viewregisterX = responsev?.data?.value;
       setviewregister(viewregisterX);
     } catch (error) {
-      console.error('Error al obtener viewregister', error);
+      console.error('Erro ao obter viewregister', error);
     }
   };
 
@@ -206,7 +206,7 @@ const Login = () => {
 
         <div className={classes.loginCard}>
           <Typography variant="h5" className={classes.formTitle}>
-            Accede a tu cuenta
+            Acesse sua conta
           </Typography>
 
           <form className={classes.form} onSubmit={handlSubmit}>
@@ -278,7 +278,7 @@ const Login = () => {
                     to="/signup"
                     className={classes.linkText}
                   >
-                    Crear cuenta
+                    Criar conta
                   </Link>
                 )}
               </Grid>
@@ -288,7 +288,7 @@ const Login = () => {
                   to="/forgetpsw"
                   className={classes.linkText}
                 >
-                  ¿Olvidaste tu contraseña?
+                  Esqueceu sua senha?
                 </Link>
               </Grid>
             </Grid>
