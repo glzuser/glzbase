@@ -1209,7 +1209,7 @@ const verifyQueue = async (
 
   const selectedOption = getBodyMessage(msg)?.trim();
   const choosenQueue = lastMessage?.body.includes(`*${selectedOption}* -`)
-  ? queues[selectedOption.toUpperCase().charCodeAt(0) - 65]
+  ? queues[parseInt(selectedOption) - 1]
   : undefined;
 
   const buttonActive = await Setting.findOne({
@@ -1222,12 +1222,12 @@ const verifyQueue = async (
   const botText = async () => {
     let options = "";
     queues.forEach((queue, index) => {
-  const letter = String.fromCharCode(65 + index); // 65 es 'A' en ASCII
-  options += `*${letter}* - ${queue.name}\n`;
+  const number = index + 1;
+  options += `*${number}* - ${queue.name}\n`;
 });
 
     const textMessage = {
-      text: formatBody(`\u200e${greetingMessage}\n\n${options}\n_Digite_ *sair* _para fechar o bot ou repará-lo_\n`, contact),
+      text: formatBody(`\u200e${greetingMessage}\n\n${options}\n_Digite_ *sair* _para fechar o bot._\n`, contact),
     };
 
     let lastMsg = map_msg.get(contact.number);
@@ -1328,7 +1328,7 @@ const verifyQueue = async (
               companyId: ticket.companyId,
             });
 
-            const finalizationMessage = "Su ticket fue finalizado porque estamos *Offline* en este momento.";
+            const finalizationMessage = "Seu ticket foi finalizado porque estamos *Offline* no momento.";
             await wbot.sendMessage(
               `${contact.number}@${ticket.isGroup ? "g.us" : "s.whatsapp.net"}`, {
               text: finalizationMessage,
@@ -1528,13 +1528,13 @@ if (count == 1) {
     where: { parentId: ticket.queueOptionId },
   });
 } else {
-  const letterIndex = messageBody.toUpperCase().charCodeAt(0) - 65; // A → 0, B → 1, etc.
+  const numberIndex = parseInt(messageBody) - 1;
   const queueOptions = await QueueOption.findAll({
     where: { parentId: ticket.queueOptionId },
     order: [["option", "ASC"], ["createdAt", "ASC"]],
   });
-  if (letterIndex >= 0 && letterIndex < queueOptions.length) {
-    option = queueOptions[letterIndex];
+  if (numberIndex >= 0 && numberIndex < queueOptions.length) {
+    option = queueOptions[numberIndex];
   }
 }
 
@@ -1544,8 +1544,8 @@ if (count == 1) {
 
     // não linha a primeira pergunta
   } else if (!isNil(queue) && isNil(ticket.queueOptionId) && !dontReadTheFirstQuestion) {
-    const letterIndex = messageBody.toUpperCase().charCodeAt(0) - 65;
-const option = letterIndex >= 0 && letterIndex < queue?.options.length ? queue.options[letterIndex] : null;
+    const numberIndex = parseInt(messageBody) - 1;
+const option = numberIndex >= 0 && numberIndex < queue?.options.length ? queue.options[numberIndex] : null;
     if (option) {
       await ticket.update({ queueOptionId: option?.id });
     }
@@ -1608,7 +1608,7 @@ const option = letterIndex >= 0 && letterIndex < queue?.options.length ? queue.o
       const buttons = [];
       queueOptions.forEach((option, i) => {
   buttons.push({
-    buttonId: `${String.fromCharCode(65 + i)}`,
+    buttonId: `${i + 1}`,
     buttonText: { displayText: option.title },
     type: 4
   });
@@ -1637,7 +1637,7 @@ const option = letterIndex >= 0 && letterIndex < queue?.options.length ? queue.o
       let options = "";
 
       queueOptions.forEach((option, i) => {
-        options += `*${String.fromCharCode(65 + i)}* - ${option.title}\n`;
+        options += `*${i + 1}* - ${option.title}\n`;
       });
       //options += `\n*[ 0 ]* - Menu anterior`;
       options += `\n*#* - Menu inicial`;
@@ -1760,7 +1760,7 @@ const option = letterIndex >= 0 && letterIndex < queue?.options.length ? queue.o
         const buttons = [];
         queueOptions.forEach((option, i) => {
   buttons.push({
-    buttonId: `${String.fromCharCode(65 + i)}`,
+    buttonId: `${i + 1}`,
     buttonText: { displayText: option.title },
     type: 4
   });
@@ -1790,7 +1790,7 @@ const option = letterIndex >= 0 && letterIndex < queue?.options.length ? queue.o
         let options = "";
 
         queueOptions.forEach((option, i) => {
-          options += `*${String.fromCharCode(65 + i)}* - ${option.title}\n`;
+          options += `*${i + 1}* - ${option.title}\n`;
         });
         options += `\n*x* - Menu anterior`;
         options += `\n*#* - Menu inicial`;
