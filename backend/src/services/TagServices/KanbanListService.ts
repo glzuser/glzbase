@@ -15,7 +15,7 @@ const KanbanListService = async ({
       kanban: 1,
       companyId: companyId,
     },
-    order: [["id", "ASC"]],
+    order: [["name", "ASC"]],
     raw: true,
   });
   return tags;
